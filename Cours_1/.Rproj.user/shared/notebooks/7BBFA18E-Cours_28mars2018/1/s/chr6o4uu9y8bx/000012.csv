@@ -1,3 +1,0 @@
-"0","source('http://www.sthda.com/upload/rquery_wordcloud.r')"
-"0","filePath <- ""https://en.wikipedia.org/wiki/Big_data"""
-"0","res<-rquery.wordcloud(filePath, type =""url"", lang = ""english"")"

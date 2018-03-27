@@ -1,8 +1,18 @@
 ---
-title: "Untitled"
+title: 'Introduction : Data Visualisation'
 author: "Laurent Politis"
-date: "26 mars 2018"
-output: ioslides_presentation
+date: "`r format(Sys.Date(),  'Le %d %B %Y')`"
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    highlight: tango
+    incremental: yes
+    logo: image/Logo_Essca.jpg
+  slidy_presentation:
+    highlight: tango
+    incremental: yes
+editor_options:
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +23,7 @@ knitr::opts_chunk$set(echo = T)
 
 ## Plan du module
 Ce cours est un TD informatique constitue d'exemples et d'exercices du langage de programmation R sur la data visualisation.
-Les différents points abordes durant ces 15 heures de cours sont : 
+Les différents points abordés durant ces 15 heures de cours sont : 
 
 - Extraction et manipulation des données (data mining)
 - Représentations graphiques 
@@ -22,9 +32,18 @@ Les différents points abordes durant ces 15 heures de cours sont :
 - Shiny et R markdown création d'application et de rapport interactif
 
 
+## Plan du module
+
+**Evaluation :** 
+
+- présentation de vos résultats en équipe d'un sujet de data science en lien avec votre sujet de mémoire 
+- script R de data mining et de data visualisation 
+
+
+
 ## Plan de ce cours
 
- Les 3 premières heures seront consacrées à une intro sur la data science et des rappels sur R
+ Les 3 premières heures seront consacrées à une introduction sur la data science et des rappels sur R
  
 - Définition et cadre 
 
@@ -74,7 +93,7 @@ yottaoctet 	Yo 	1024 	280
 ## Méga Données ?
 <CENTER>
 
-<img src="image/bigdata_vs_bio.png" height="250px" width="650px" />
+<img src="image/bigdata_vs_bio.png" height="350px" width="850px" />
 </CENTER>
 
 ## Définition *Big Data*
@@ -83,7 +102,6 @@ yottaoctet 	Yo 	1024 	280
 *"Big data is a term that describes large volumes of high velocity, complex and variable data that require **advanced techniques** and technologies to enable the capture, storage, distribution, management, and analysis of the information."*
 
 [TechAmerica Foundation's Federal Big Data Commission, 2012](https://www.sciencedirect.com/science/article/pii/S0268401214001066) 
-
 ```{r BIGDATA, fig.height=3, fig.width=8, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(readr)
 library(ggplot2)
@@ -98,10 +116,18 @@ ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans t
 ```
 
 
+## Un besoin d'analyse 
 
+des outils, méthodes ... 
 
+R open source 
 
-<!-- Data science  -->
+<CENTER>
+
+<img src="image/data_science.png" height="450px" width="850px" />
+</CENTER>
+
+<!-- Data science 
 
 <!-- Data mining  -->
 
@@ -391,7 +417,7 @@ f.m
 c.m <- cbind(c)
 c.m
 ```
-## Matrices numériques ou  caractéres
+## Matrices numériques ou  caractères
 ```{r matrix1, echo=TRUE, message=TRUE}
 m.m <- cbind(f.m,f.m)
 m.m
@@ -428,7 +454,7 @@ object.size(as.data.frame(mat))
 ```
 
 
-## Passer d'un type ? l'autre
+## Passer d'un type à l'autre
 ```{r as, echo=TRUE, message=TRUE}
 as.matrix(df)
 
@@ -454,12 +480,12 @@ les commandes matrix(), cbind(), data.frame() sont des fonctions codées
 
 * un objet R
 * des commandes R ?crites dans un fichier qui effectuent une t?che pr?d?finie
-* permet de faire automatiquement la m?me t?che plusieurs fois 
+* permet de faire automatiquement la même tâche plusieurs fois 
 * garder un programme plus lisible 
 * un gain de temps ? long terme 
 
 ## Ecrire votre premi?re fonction 
- ?crire le m?me code que pr?c?demment sous forme de fonction dans un nouveau fichier hello_fun.R
+ écrire le même code que précédemment sous forme de fonction dans un nouveau fichier hello_fun.R
 
 ```{r fonction2, echo=TRUE, message=TRUE}
 hello <-function(texte=NULL){   # argument ou données d'entr?e
@@ -473,18 +499,18 @@ return(texte)  #  return  renvoie le r?sultat de la fonction
  hello("hello world !")
 ```
 
-## Un peu plus complique 
+## Un peu plus compliqué
 un petit ajout le nom de l'utilisateur
  
 ```{r fonction1, echo=TRUE, message=TRUE}
 hello <-function(texte=NULL){  
   #on souhaite coller le nom de l'utilisateur ? "hello world"
-  # on r?cup?re le nom de l'utilisateur 
+  # on récupére le nom de l'utilisateur 
  nom <- Sys.getenv("USERNAME") # fonction trouv?e via une recherche web
    # on colle le nom de l'utilisateur
  texte <- paste(nom,texte)
  
-return(texte)  #  return  renvoie le r?sultat de la fonction  
+return(texte)  #  return  renvoie le résultat de la fonction  
 }
 
  source("cours_data_visualisation/hello_fun2.R")
@@ -494,7 +520,7 @@ return(texte)  #  return  renvoie le r?sultat de la fonction
 
 ## Fonction cor()
 
-Vous avez ?crit une fonction comme les fonctions de base de R exemple cor() qui calcule la corr?lation des données de 2 vecteurs ou des données contenues dans une matrice 
+Vous avez écrit une fonction comme les fonctions de base de R, comme par exemple cor() qui calcule la corrélation des données de deux vecteurs ou des données contenues dans une matrice 
 
 ```{r fonction, echo=TRUE, message=TRUE}
 nrow

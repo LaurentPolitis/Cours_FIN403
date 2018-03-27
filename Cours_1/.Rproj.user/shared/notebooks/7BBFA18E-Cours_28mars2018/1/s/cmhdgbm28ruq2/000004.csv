@@ -1,1 +1,0 @@
-"0","ggplot(df,aes(x=x,y=y,colour=test,size=test))+geom_text(aes(label=lettres))+labs(colour="""",size="""")+scale_color_manual(values = c(""red"",""black""))+scale_size_manual(values = c(6.5,4))"

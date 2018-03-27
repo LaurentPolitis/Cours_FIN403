@@ -1,6 +1,0 @@
-"0","library(ggplot2)"
-"0","df = data.frame(x=rnorm(1:84),y=rnorm(1:84),"
-"0","                lettres=LETTERS[rep(seq( from = 1, to = 28 ),3)])"
-"0","df[!complete.cases(df),""lettres""]=""A"""
-"0","df$test= ifelse(df$lettres==""A"",""A"",""pas A"")"
-"0","ggplot(df,aes(x=x,y=y))+geom_text(aes(label=lettres))"

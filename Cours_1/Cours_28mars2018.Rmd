@@ -3,14 +3,14 @@ title: 'Introduction : Data Visualisation'
 author: "Laurent Politis"
 date: "`r format(Sys.Date(),  'Le %d %B %Y')`"
 output:
-  slidy_presentation:
-    highlight: tango
-    incremental: yes
   ioslides_presentation:
     fig_caption: yes
     highlight: tango
     incremental: yes
     logo: image/Logo_Essca.jpg
+  slidy_presentation:
+    highlight: tango
+    incremental: yes
 editor_options:
   chunk_output_type: inline
 ---
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = T)
 
 ## Plan du module
 Ce cours est un TD informatique constitue d'exemples et d'exercices du langage de programmation R sur la data visualisation.
-Les différents points abordes durant ces 15 heures de cours sont : 
+Les différents points abordés durant ces 15 heures de cours sont : 
 
 - Extraction et manipulation des données (data mining)
 - Représentations graphiques 
@@ -32,9 +32,18 @@ Les différents points abordes durant ces 15 heures de cours sont :
 - Shiny et R markdown création d'application et de rapport interactif
 
 
+## Plan du module
+
+**Evaluation :** 
+
+- présentation de vos résultats en équipe d'un sujet de data science en lien avec votre sujet de mémoire 
+- script R de data mining et de data visualisation 
+
+
+
 ## Plan de ce cours
 
- Les 3 premières heures seront consacrées à une intro sur la data science et des rappels sur R
+ Les 3 premières heures seront consacrées à une introduction sur la data science et des rappels sur R
  
 - Définition et cadre 
 
@@ -84,7 +93,7 @@ yottaoctet 	Yo 	1024 	280
 ## Méga Données ?
 <CENTER>
 
-<img src="image/bigdata_vs_bio.png" height="250px" width="650px" />
+<img src="image/bigdata_vs_bio.png" height="350px" width="850px" />
 </CENTER>
 
 ## Définition *Big Data*
@@ -93,6 +102,8 @@ yottaoctet 	Yo 	1024 	280
 *"Big data is a term that describes large volumes of high velocity, complex and variable data that require **advanced techniques** and technologies to enable the capture, storage, distribution, management, and analysis of the information."*
 
 [TechAmerica Foundation's Federal Big Data Commission, 2012](https://www.sciencedirect.com/science/article/pii/S0268401214001066) 
+
+## Besoin d'analyse 
 
 ```{r BIGDATA, fig.height=3, fig.width=8, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(readr)
@@ -107,11 +118,14 @@ ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans t
 
 ```
 
+## des outils, méthodes ... 
 
+<CENTER>
 
+<img src="image/data_science.png" height="450px" width="850px" />
+</CENTER>
 
-
-<!-- Data science  -->
+<!-- Data science 
 
 <!-- Data mining  -->
 
@@ -156,6 +170,7 @@ Définition
  - mémoire courte quelques secondes d'attention ou de réflexion
  - un max de $\simeq 11$ types de couleurs ou de styles différents facilement distinguables 
  - notion de perspective données et vérités 
+ 
 
  
 
@@ -165,6 +180,29 @@ source "How to Lie With Statistics", 1954, *Huff*
 ## Science sous jacente les statistiques 
 <img src="C:/Users/Laurent/Pictures/huff1.jpg" height="450px" width="400px" />
 source "How to Lie With Statistics", 1954, *Huff*
+
+## Mathématiques, géométrie et données
+
+sous-jacentes déterminent l'allure du graphique et influence le lecteur 
+
+<center>
+<img src="image/america_trump.png" height="300px" width="600px"/>
+<center/>
+## Mathématiques, géométrie et données
+<center>
+
+<img src="image/clinton.png" height="380px" width="700px"/>
+<center/>
+
+## Un graphe une histoires dif.
+<center>
+<img src="image/2016_america.png" height="340px" width="690px"/>
+<center/>
+
+Pour rappel, Clinton a perdu l'élection 242 "county" contre 2,232 pour Trump. Cependant, au vote populaire Clinton passe devant Trump avec respectivement 50.5% et 49.5% des votes en sa faveur. 
+
+
+
 
 
 ## Un graphique vaut mille mots 
@@ -235,12 +273,12 @@ http://cran.r-project.org/bin/windows/base/
 
 **Sur Apple**
 
-http://cran.r-project.org/bin/macosx/ et t?l?charger la dernières version de R
+http://cran.r-project.org/bin/macosx/ et télécharger la dernières version de R
 
 **Pour installer Rstudio**
 
 
- http://www.rstudio.com/ide/ pour t?l?charger la dernières version et installer l'environnement de travail *R studio* en suivant les indications du site
+ http://www.rstudio.com/ide/ pour télécharger la dernières version et installer l'environnement de travail *R studio* en suivant les indications du site
 
 ##  Pour ?tre bon en R ...
 
@@ -251,7 +289,7 @@ http://cran.r-project.org/bin/macosx/ et t?l?charger la dernières version de R
   * [stack overflow](http://stackoverflow.com/) forum en ligne
   * suivre des exemples  R blogger, git_hub ...
   * commandes  en console R `??` et `?` 
-  * utiliser un environnement de travail int?gr? (IDE) comme Rstudio (facilite la programmation, auto indentation, variables historiques, etc ...)
+  * utiliser un environnement de travail intégré (IDE) comme Rstudio (facilite la programmation, auto indentation, variables historiques, etc ...)
 
 ## Présentation de Rstudio 
   <img src="C:/Users/Laurent/Pictures/IDE.PNG" height="400px" width="800px" />
@@ -301,7 +339,8 @@ Ce qui a changé
 * Ajout de la commande lanc?e dans la console R dans l'historique 
 * Ajout de la variable `a` dans l'environnement R (commande ls() pour lister les objets)
 
-## Les variables dans R
+## Les variables dans R 
+
 
 ```{r console, echo=TRUE, message=TRUE,eval=TRUE}
 class(a)
@@ -319,17 +358,28 @@ f <- c(1,"a","d",4)
 ```
 
 
-
-
-##  Les variables dans R suite  
+## Les vecteurs 
 
 
 
-```{r console, echo=TRUE, message=TRUE,eval=TRUE}
+```{r fonction_vec, echo=TRUE, message=TRUE,eval=TRUE}
+length(x = c)
 
-## factor 
+names(x=e)
+
+# accéder à un élement
+c[1]
+e["a"]
+# ou plusieurs
+c[1:2]
+e[c("a","c")]
+```
 
 
+##  Les facteurs
+
+
+```{r factor, echo=TRUE, message=TRUE,eval=TRUE}
 
 ff<-factor(1:10)
 
@@ -338,6 +388,10 @@ f <- factor(1:10,levels = seq(from = 10,to = 1,by = -1))
 ff
 
 f
+
+as.numeric(as.character(ff))
+
+as.numeric(ff)
 
 ```
 
@@ -361,9 +415,9 @@ f.m
 c.m <- cbind(c)
 c.m
 ```
-## Matrices numériques ou  caractéres
+## Matrices numériques ou  caractères
 ```{r matrix1, echo=TRUE, message=TRUE}
-m.m <- cbind(f.m,c.m)
+m.m <- cbind(f.m,f.m)
 m.m
 n.m <- cbind(c.m,c.m)
 n.m
@@ -372,9 +426,9 @@ n.m
 
 ## Matrices et Data frames
 ```{r dataframe, echo=TRUE, message=TRUE}
-mat <- matrix(data = c.m, ncol=4,nrow = 3)
+mat <- matrix(data = rep(c.m,3), ncol=3,nrow = 4)
 mat
-df = data.frame("numeriques"= c, lettres=f,stringsAsFactors = F)
+df = data.frame("numeriques"= 1:4, lettres=c("A","B","C","D"),stringsAsFactors = F)
 df 
 ```
 
@@ -386,7 +440,19 @@ class(df[,"numeriques"])
 class(df[,"lettres"])
 ```
 
-## Passer d'un type ? l'autre
+
+## Matrices Vs Data frames
+Quelle est l'avantange d'une matrice par rapport à une data frame ? 
+```{r sizedataframe, message=TRUE, include=FALSE}
+
+object.size(mat)
+
+object.size(as.data.frame(mat))
+
+```
+
+
+## Passer d'un type à l'autre
 ```{r as, echo=TRUE, message=TRUE}
 as.matrix(df)
 
@@ -411,38 +477,38 @@ les commandes matrix(), cbind(), data.frame() sont des fonctions codées
 
 
 * un objet R
-* des commandes R ?crites dans un fichier qui effectuent une t?che pr?d?finie
-* permet de faire automatiquement la m?me t?che plusieurs fois 
+* des commandes R ?crites dans un fichier qui effectuent une tâche prédéfinie
+* permet de faire automatiquement la même tâche plusieurs fois 
 * garder un programme plus lisible 
-* un gain de temps ? long terme 
+* un gain de temps à long terme 
 
-## Ecrire votre premi?re fonction 
- ?crire le m?me code que pr?c?demment sous forme de fonction dans un nouveau fichier hello_fun.R
+## Ecrire votre première fonction 
+ écrire le même code que précédemment sous forme de fonction dans un nouveau fichier hello_fun.R
 
 ```{r fonction2, echo=TRUE, message=TRUE}
-hello <-function(texte=NULL){   # argument ou données d'entr?e
+hello <-function(texte=NULL){   # argument ou données d'entrées
 
-  #code manipulant les données d'entr?e
+  #code manipulant les données d'entrée
  
-return(texte)  #  return  renvoie le r?sultat de la fonction  
+return(texte)  #  return  renvoie le résultat de la fonction  
 }
  source("cours_data_visualisation/hello_fun.R")
 
  hello("hello world !")
 ```
 
-## Un peu plus complique 
+## Un peu plus compliqué
 un petit ajout le nom de l'utilisateur
  
 ```{r fonction1, echo=TRUE, message=TRUE}
 hello <-function(texte=NULL){  
-  #on souhaite coller le nom de l'utilisateur ? "hello world"
-  # on r?cup?re le nom de l'utilisateur 
- nom <- Sys.getenv("USERNAME") # fonction trouv?e via une recherche web
+  #on souhaite coller le nom de l'utilisateur à "hello world"
+  # on récupére le nom de l'utilisateur 
+ nom <- Sys.getenv("USERNAME") # fonction trouvée via une recherche web
    # on colle le nom de l'utilisateur
  texte <- paste(nom,texte)
  
-return(texte)  #  return  renvoie le r?sultat de la fonction  
+return(texte)  #  return  renvoie le résultat de la fonction  
 }
 
  source("cours_data_visualisation/hello_fun2.R")
@@ -452,21 +518,53 @@ return(texte)  #  return  renvoie le r?sultat de la fonction
 
 ## Fonction cor()
 
-Vous avez ?crit une fonction comme les fonctions de base de R exemple cor() qui calcule la corr?lation des données de 2 vecteurs ou des données contenues dans une matrice 
+Vous avez écrit une fonction comme les fonctions de base de R, comme par exemple cor() qui calcule la corrélation des données de deux vecteurs ou des données contenues dans une matrice 
 
 ```{r fonction, echo=TRUE, message=TRUE}
-cor
+nrow
+?cor
+cor(rnorm(n = 100,mean = 1,sd = 0.25),rnorm(n = 100,mean = 1,sd = 25))
 ```
+
+## Les boucles 
+Calculer $n!$ pour $n=10$.
+
+```{r for, echo=TRUE, fig.height=4, message=FALSE, warning=FALSE, paged.print=FALSE}
+factorielle <-1
+for (i in seq(1, 10)){
+  factorielle <- factorielle*i
+}
+    
+print(factorielle)
+
+```
+
+## Vérification 
+
+On vérifie avec la fonction déjà codée.
+```{r echo=TRUE}
+factorial(10)
+
+
+```
+
+```{r echo=FALSE, fig.height=3}
+
+qplot(1:2000/100,gamma((1:2000)/100)) + scale_y_log10()+ ggthemes::theme_fivethirtyeight() + labs(title="Fonction gamma")
+```
+
+
+
 
 ## Importer des données  
 Importer des données via [quandl](https://www.quandl.com/)
 
-Par exemple l'?volution de la population ? Angers 
+Par exemple l'évolution de la population à Angers 
 
 https://www.quandl.com/data/INSEE/29_000067684_A-Demography-Municipal-population-at-the-census-Angers
 
-* T?l?charger les données sous format .csv 
-* ouvrir les données via R m?thode graphique 
+* Télécharger les données sous format .csv 
+* ouvrir les données via R méthode graphique 
 ![Import Dataset > from Local File](C:/Users/Laurent/Pictures/IDE5.PNG)
 
 ## Importer des données  sous R 
@@ -529,6 +627,7 @@ plot(x = as.Date(INSEE.29_000067684_A$Date),y=
      ylab="populations")
 
 ```
+
 
 
 

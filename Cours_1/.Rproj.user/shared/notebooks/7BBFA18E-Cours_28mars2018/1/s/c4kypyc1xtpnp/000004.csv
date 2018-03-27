@@ -1,8 +1,0 @@
-"0","library(readr)"
-"0","library(ggplot2)"
-"0","library(ggthemes)"
-"0","multiTimeline <- read_csv(""data/multiTimeline.csv"",skip = 2)"
-"0","multiTimeline$date <- paste0(multiTimeline$Mois,""-15"")"
-"0","ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans tous les pays)`)) + geom_line(size=1) +"
-"0","  geom_smooth(se = FALSE)+ theme_igray()+"
-"0","  labs(x=""Date"",y=""Recherche en %"", title=""Big Data"",subtitle=""Fréquence des recherches du mot Big Data depuis 2004"",caption=""https://trends.google.com/trends/explore?date=all&q=Big%20data"")"
