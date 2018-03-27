@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1522096134769.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "1421299711",
+    "id" : "1A9A5A0B",
+    "lastKnownWriteTime" : 1522102655,
+    "last_content_update" : 1522102655149,
+    "path" : "~/Cours_FIN403_2018/Cours_1/cours_test.Rmd",
+    "project_path" : "cours_test.Rmd",
+    "properties" : {
+        "cursorPosition" : "517,9",
+        "docOutlineSize" : "244.8983108050379",
+        "docOutlineVisible" : "1",
+        "last_setup_crc32" : "",
+        "scrollLine" : "511",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

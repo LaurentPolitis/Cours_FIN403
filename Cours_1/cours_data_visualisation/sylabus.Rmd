@@ -1,0 +1,117 @@
+---
+title: "Cours de data visualisation"
+author: "Laurent Politis"
+output:
+  html_document:
+    fig_caption: yes
+    highlight: pygments
+    theme: journal
+    toc: yes
+  word_document:
+    toc: yes
+---
+
+
+![Mesures d'excuses re?ues et donn?es sur une semaine source [dear data](http://www.dear-data.com/week-45-a-week-of-apologies)](sorry_recto.png)
+
+
+# Syllabus
+
+## PrÃ©sentation gÃ©nÃ©rale 
+
+L'objectif du cours est d'utiliser le langage de programmation statistique R et d'outils en ligne simple afin de mettre en valeur vos rÃ©sultats d'analyses statistiques. Ce cours n'est pas un cours de statistique en soit mÃªme si des rappels sur certaines notions seront faits. Le cours est constitÃ© d'exemples de codes R et d'exercices que l'Ã©tudiant appliquera directement sur son ordinateur et sa console R sous cette forme : 
+```{r exemple}
+print('Hello world !')
+ 
+```
+
+
+
+Dans un premier temps, nous allons dÃ©couvrir comment importer et explorer diffÃ©rentes donnÃ©es sous R. Puis nous allons apprendre comment  prÃ©parer les donnÃ©es afin de crÃ©er de magnifiques graphiques et applications interactives. Ces outils acquis durant le cours vous permettront de mettre en valeur vos Ã©tudes ou reportings, qui vous seront utiles dans un contexte acadÃ©mique ou  professionnel. 
+
+**Plan** 
+
+Ce cours est un TD informatique constituÃ© d'exemples et d'exercices que l'Ã©tudiant reproduira sur son ordinateur. 
+Durant ces 15 heures de cours les points abordÃ©s sont : 
+
+1. Extraction et manipulation de donnÃ©es
+2. ReprÃ©sentations graphiques classiques et amÃ©liorations
+3. ReprÃ©sentations graphiques interactives (html widget, plotly ...)
+4. Shiny et R markdown crÃ©ation d'application et de rapport interactif 
+  
+
+**Mode d'Ã©valuation**
+
+L'Ã©valuation de ce cours consiste en la crÃ©ation d'un programme R sur la mise en forme des donnÃ©es utilisÃ©es pour votre mÃ©moire. Le projet peut Ãªtre menÃ© individuellement ou en binÃ´me. 
+
+<!-- 
+d'une application shiny ou d'un document  markdown
+--> 
+
+## ThÃ©mes abordÃ©s
+
+
+### PrÃ©sentation du cours et de R 
+
+**Le 14 mars, 10h00/13h00** * 1h  cours magistral*
+
+Au dÃ©but du cours seront prÃ©sentÃ©s la data visualisation en gÃ©nÃ©ral et le logiciel [R](https://www.r-project.org/). 
+
+
+$\simeq$*2h* *travaux dirig?s*
+
+  Un rappel sur l'utilisation de la console et de l'environnement de dÃ©veloppement intÃ©grÃ© (IDE) [R studio](www.rstudio.com)  sera effectuÃ© au dÃ©but de cette premiÃ©re partie. Des fonctions de base sous [R](https://www.r-project.org/) permettant d' importer les donnÃ©es depuis un fichiers texte, csv, excel et mÃªme directement depuis le web seront prÃ©sentÃ©es. On examinera comment [R](https://www.r-project.org/) stocke les donnÃ©es sous forme de variables, comment les manipuler et de les prÃ©senter sous forme de graphiques ...  
+
+
+
+
+ 
+### Suite visualiser ces donn?es 
+**Le 13 avril, 10h00/13h00** *$=$ 3h* *travaux dirig?s*
+
+Dans le cours prÃ©cÃ©dent vous avez appris les fonctions [R](https://www.r-project.org/) de mÃ©thodes statistiques descriptives et de modÃ©lisation de base, tels que mean(), median(), sum(), lm(), summary()... Il existe des plots aussi de base qui permettent d'examiner les diffÃ©rents jeux de donnÃ©es et modÃ¨les statistiques. Ces graphiques constituent des arguments et des preuves pour mettre en Ã©vidence les rÃ©sultats que vous avancez et leurs pertinences de maniÃ¨re simple et synthÃ©tique. Les graphiques que nous allons crÃ©er sont entre autres : 
+
+* SÃ©ries temporelles avec plusieurs courbes 
+* Les boites Ã  moustaches 
+* Les histogrammes 
+* Les courbes de densitÃ©
+* Les fameux camembert (et les limites de leurs utilisations)
+
+Dans le cours du semestre dernier vous avez appris comment modÃ©liser des relations entre diffÃ©rents jeux de donnÃ©es Ã  l'aide de modÃ©le linÃ©aire lm() ou ARIMA. 
+Nous allons dÃ©couvrir les diverses graphiques diagnostiques de ces modÃ©lisations statistiques qui permettent entre autres de repÃ©rer les meilleures variables explicatives, de rejeter les mauvaises et de vÃ©rifier les rÃ©sultats de modÃ©lisation.
+
+* Nuage de points, qqplots ... et autres 
+
+### Graphiques Interactifs et application 
+*$=$ 6h* *travaux dirigÃ©s*
+
+
+Nous avons passÃ© en revue diffÃ©rentes maniÃ¨res de prÃ©senter nos donnÃ©es sous forme d'illustration statistique. Dans cette partie, les outils de visualisation interactive faisant appel Ã  des librairies codÃ©es en java  et en html 5 seront prÃ©sentÃ©s (html widget, [shiny](http://shiny.rstudio.com/) et r markdown). Les outils comme shiny, r markdown et plotly permettent de crÃ©er de vÃ©ritables petites applications de visualisations et d'applications de vos rÃ©sultats. Par exemple, le syllabus que vous lisez est entiÃ¨rement fait sous [R](https://www.r-project.org/) Ã  l'aide de r markdown.
+Edf utilise shiny pour crÃ©er des apllications d'aide Ã  la decision. 
+
+### Travaux pratiques
+*$=$ 3h* *tp*
+
+Applications des outils graphiques pr?c?dents sur les donn?es de vos m?moires. Le but de ce TP est de commencer ? travailler sur les donn?es de votre m?moire ? l'aide d'un programme R. 
+
+
+## R?f?rence et conseils de lecture 
+
+  **Sur la visualisation des donn?es** 
+  
+ * http://www.r-bloggers.com/ un blog contenant des articles divers et vari?s sur les nouveaut?s [R](https://www.r-project.org/).
+ * http://vissoc.co/ cours de Data Visualisation avec R et en particulier avec ggplot2
+ * https://sites.google.com/a/analytics.usfca.edu/msan-622-experimental-design-and-visualization/ cours de data visualisation avec R ggplot2 et shiny 
+ * http://flowingdata.com/ site compilant de tr?s belles illustrations faites en grande partie avec R 
+ * http://www.htmlwidgets.org/
+ 
+ **Sur les bases de R**
+ 
+ * https://openclassrooms.com/courses/effectuez-vos-etudes-statistiques-avec-r
+ * http://www.statmethods.net/ pour des exemples rapides en R 
+ * https://www.datacamp.com/ des cours de base gratuits sur R interactifs
+ 
+ **Autres**
+ 
+ * https://www.kaggle.com/ 
+ 

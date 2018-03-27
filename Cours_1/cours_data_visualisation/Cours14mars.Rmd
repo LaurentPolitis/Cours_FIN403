@@ -1,0 +1,157 @@
+---
+title: "Data Visualisation initiation"
+author: "Laurent Politis"
+date: "29 février 2016"
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    highlight: tango
+    incremental: yes
+    logo: C:/Users/Laurent/Pictures/Logo_Essca.jpg
+  slidy_presentation:
+    highlight: tango
+    incremental: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+Ce cours est un TD informatique constitué d'exemples et d'exercices du langage de programmation R sur la data visualisation.
+Les différents points abordés durant ces 15 heures de cours sont : 
+
+- Extraction et manipulation des données (data mining)
+- Représentations graphiques classiques et améliorées
+- Représentations graphiques interactives (html widget, plotly ...)
+- Shiny et R markdown création d'application et de rapport interactif 
+
+##  Data visualation   
+
+
+Définition
+
+- communiqué des données de façon visuelle
+
+- 
+[<img src="C:/Users/Laurent/Pictures/volcan_chauvet.png" height="200px" width="500px" /> ](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwifmvOmyLTLAhVpGZoKHfHTCVIQFggtMAI&url=http%3A%2F%2Fwww.hominides.com%2Fhtml%2Factualites%2Fvolcan-chauvet-art-parietal-0997.php&usg=AFQjCNEkHHN2mcgvHqIeMiFzsxQeHOghKw&sig2=M_S-Hnbu-FnwG4XA6kE_yg)
+
+- transformé  des données en information
+
+- résultats graphiques clairs et compréhensibles 
+
+
+
+## Exemple 
+
+
+- <img src="C:/Users/Laurent/Pictures/Minard.png" height="250px" width="800px" />
+[un des meilleurs graphiques statiques](https://fr.wikipedia.org/wiki/Charles_Joseph_Minard)
+
+- http://esri.github.io/wind-js/ SIG
+
+- http://flowingdata.com/2016/01/05/causes-of-death/ séries temporelles 
+
+- http://www.nytimes.com/interactive/2015/03/19/upshot/3d-yield-curve-economic-growth.html 3D 
+
+##Principes d'infographie
+
+ - mémoire courte quelques secondes d'attention ou de réflexion
+ - de 4 à 11 éléments du même type différents facilement distinguable (sobriété)
+ - notion de perspectives données et vérité 
+
+ 
+
+- <img src="C:/Users/Laurent/Pictures/pay_rolls.png  " height="300px" width="490px" />
+source "How to Lie With Statistics", 1954, *Huff*
+
+## Science sous jacente les statitiques 
+<img src="C:/Users/Laurent/Pictures/huff1.jpg    " height="450px" width="400px" />
+source "How to Lie With Statistics", 1954, *Huff*
+
+
+## Un graphique vaut mille mots 
+
+```{r motss}
+library(ggplot2)
+df = data.frame(x=rnorm(1:84),y=rnorm(1:84),
+                lettres=LETTERS[rep(seq( from = 1, to = 28 ),3)])
+
+df[!complete.cases(df),"lettres"]="A"
+df$test= ifelse(df$lettres=="A","A","pas A")
+ggplot(df,aes(x=x,y=y))+geom_text(aes(label=lettres))
+#ggplot(df,aes(x=x,y=y,colour=test))+geom_text(aes(label=lettres))
+
+```
+
+## Combien y a t il de A ?  
+
+
+```{r mot1}
+ggplot(df,aes(x=x,y=y,colour=test))+geom_text(aes(label=lettres))+labs(colour="")+scale_color_manual(values = c("red","black"))
+
+```
+
+* Réponse : 9
+
+<!-- ## Regardons le code  -->
+
+<!-- ```{r mot_description, echo=TRUE, message=TRUE,eval=FALSE} -->
+<!-- # Partie setup  -->
+<!-- library(ggplot2) -->
+
+<!-- # Partie data mining et calcul  -->
+
+<!-- df = data.frame(x=rnorm(1:87),y=rnorm(1:87), -->
+<!--                 lettres=LETTERS[rep(seq( from = 1, to = 27 ),3)]) -->
+<!-- df[!complete.cases(df),"lettres"]="A" -->
+<!-- df$test= ifelse(df$lettres=="A","A","pas A") -->
+
+
+<!-- # Partie data visualisation -->
+
+<!-- ggplot(df,aes(x=x,y=y))+geom_text(aes(label=lettres)) -->
+<!-- #ggplot(df,aes(x=x,y=y,colour=test))+geom_text(aes(label=lettres)) -->
+
+<!-- ``` -->
+
+
+
+## Pourquoi R 
+
+- Open source & Gratuit 
+- Facile à installer sur les systèmes d'exploitations Linux, Windows et Apple 
+- Une très grosse communauté de développeurs et d'utilisateurs 
+- Facile à utiliser pour des non-programmeurs pour des calculs statistiques 
+- Possibilité de créer de belles illustrations, applications web et même la présentation que vous lisez actuellement 
+          <img src="C:/Users/Laurent/Pictures/run_Paris.png" height="200px" width="400px" /> 
+
+## Installation de R 
+
+
+**Sur Windows**
+
+Allez sur l'url http://cran.r-project.org/bin/windows/base/  et téléchargez la dernière version de R en fonction de votre ordinateur 32 bit ou 64 bit (pour le savoir allez sur *paramètres>système>information système*)
+
+
+**Sur Apple**
+
+Rendez vous sur l'url http://cran.r-project.org/bin/macosx/ et téléchargez la dernière version de R
+
+**Pour installer Rstudio**
+
+
+Allez sur l'url http://www.rstudio.com/ide/ et télécharger la dernière version pour télécharger et installer l'environnement de travail *R studio* en suivant les indications du site
+
+##  Pour être bon en R ...
+
+
+
+- savoir demander de l'aide  la qualité principale d'un programmeur (90% de ses compétences)
+
+  * [stack overflow](http://stackoverflow.com/) forum d'aides
+  * suivre des exemples  R blogger, git_hub ...
+  * commandes en console R `??` et `?` 
+  * utilisé un environnement de travail intégré (IDE) comme Rstudio (facilite la programmation, auto indentation, variables historiques, etc ...)
+
+
