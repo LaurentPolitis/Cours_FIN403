@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = T)
 
 
 ## Plan du module
-Ce cours est un TD informatique constitue d'exemples et d'exercices du langage de programmation R sur la data visualisation.
+Ce cours est un TD informatique constitué d'exemples et d'exercices du langage de programmation R sur la data visualisation.
 Les différents points abordés durant ces 15 heures de cours sont : 
 
 - Extraction et manipulation des données (data mining)
@@ -31,6 +31,7 @@ Les différents points abordés durant ces 15 heures de cours sont :
 - Représentations graphiques interactives (html widget, plotly ...)
 - Shiny et R markdown création d'application et de rapport interactif
 
+https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordes
 
 ## Plan du module
 
@@ -133,9 +134,17 @@ ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans t
 
 <!-- Deep Learning  -->
 
+## Pourquoi R ? 
 
+https://laurentpolitis.github.io/FIN406_2017/docs/intro.html
 
+## Installation de R et de Rstudio 
 
+Liens pour installer R 
+
+https://jjallaire.shinyapps.io/learnr-tutorial-00-setup/
+
+https://laurentpolitis.github.io/FIN406_2017/docs/intro.html#pourquoi-r
 
 
 ##  Data visualation   
@@ -627,7 +636,7 @@ plot(x = as.Date(INSEE.29_000067684_A$Date),y=
      ylab="populations")
 
 ```
-
+C'était l'outil classique de création de graphe de R "plot()". Le prochain cours je vous présenterais "la grammaire graphique" avec ggplot2.
 
 
 
