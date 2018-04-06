@@ -1,0 +1,62 @@
+---
+title: 'Introduction : Data Visualisation'
+author: "Laurent Politis"
+date: "`r format(Sys.Date(),  'Le %d %B %Y')`"
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    highlight: tango
+    incremental: yes
+    logo: image/Logo_Essca.jpg
+  slidy_presentation:
+    highlight: tango
+    incremental: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+## Plan du cours 
+
+- Recherche reproductible (documentation avec R)
+- Apllication web interractif 
+- TD ggplot2 data viz 
+- Intro sur data viz html 
+
+## Recherche reproductible 
+
+**Source :**
+
+- [Rmarkdown](https://rmarkdown.rstudio.com/)   
+- [Aide mémoire](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)   
+
+
+
+## Application interactive 
+
+**Source :**
+
+- [Shiny](https://shiny.rstudio.com/)   
+- [Aide mémoire](https://shiny.rstudio.com/images/shiny-cheatsheet.pdf)   
+
+
+## Retour sur ggplot2 
+
+
+[Cours2](https://laurentpolitis.github.io/FIN406_2017/docs/data-visualisation.html)
+
+répondre aux questions et les mettre sur Rmarkdown 
+
+
+## Graphe interactif  
+
+[Cours4](https://laurentpolitis.github.io/FIN406_2017/docs/visualisation-ii.html)
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(dygraphs)
+dygraph(nhtemp, main = "New Haven Temperatures", ylab = "Temp (F)") 
+```
+
+
+
+
