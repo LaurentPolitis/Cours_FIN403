@@ -18,7 +18,7 @@ editor_options:
 ## Plan du cours 
 
 - Recherche reproductible (documentation avec R)
-- Apllication web interractif 
+- Application Web interactive 
 - TD ggplot2 data viz 
 - Intro sur data viz html 
 
