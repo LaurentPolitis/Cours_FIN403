@@ -27,7 +27,9 @@ editor_options:
 Le principe de ce paquet est d'utiliser des fonctions de haut niveau de manipulation d'objet de données. La syntaxe et la philosophie de ce paquet est similaire au langage SQL. 
 
 
-Il permet de réduire dans la plupart des cas la taille du code écrit gràce à cet objet `%>%` (un opérateur assimilable au `+` dans ggplot2). A l'instar de Ggplot, il possède une grammaire de manipulation de données. Les verbes (les fonctions) de ce paquet permettent de résoudre des problèmes communs de manipulation de données. 
+Il permet de réduire dans la plupart des cas la taille du code écrit gràce à cet objet `%>%` (un opérateur assimilable au `+` dans ggplot2). 
+
+A l'instar de Ggplot, il possède une grammaire de manipulation de données. Les verbes (les fonctions) de ce paquet permettent de résoudre des problèmes communs de manipulation de données. 
 
 
 ## Dplyr 
@@ -63,7 +65,7 @@ Nous allons étudier les 5 fonctions de dplyr : `mutate()`, `filter()`, `select()
 ## Exemple d'une application 
 
 
-Le but de cet exemple est de télécharger le taux de l'euros avec d'autre devises et d'arranger les données sous forme de data.frame. 
+Le but de cet exemple est de télécharger le taux de change  l'euros avec d'autre devises et d'arranger les données sous forme de data.frame. 
 
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE,eval=F}
@@ -98,7 +100,7 @@ df_list = lapply(setNames(object = unique(dt$symbol),
                  function(y) return( dt %>% 
                    filter(y == symbol)) %>%
                    select(exchange.rate))
-#do.call utilsation d'une fonction une liste donnée 
+#do.call utilsation d'une fonction et d'une liste donnée 
 df_data = do.call(what = "cbind",args = df_list)
 # changement de noms des colonnes de la data frame 
 colnames(df_data) = unique(dt$symbol)
@@ -122,7 +124,7 @@ apply(X =df_data ,MARGIN = 2 ,FUN = function(x) {mean(x)})
 
 ```
 
-** Moyenne par ligne**
+**Moyenne par ligne**
 
 ```{r echo=T, message=FALSE, warning=FALSE,eval=F}
 apply(X =df_data ,MARGIN = 1 ,FUN = mean(x))
@@ -149,7 +151,7 @@ Calcul sur des données avec des structures matricielles :
 apply(X =df_data ,MARGIN = 2 ,FUN = mean)
 ```
 
-** Moyenne par ligne**
+**Moyenne par ligne**
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 head(apply(X =df_data ,MARGIN = 1 ,FUN = mean),n = 5)
@@ -202,7 +204,30 @@ print(paste("Avec Parallelisation",Sys.time()-time))
 
 
 
+## Analyses Séries Temporelles 
 
 
+```{r fig.height=2.5, fig.width=8.5}
+
+library(ggplot2)
+
+ggplot(dt) + geom_line(aes(x = date,y = exchange.rate,color=symbol),size=1)+
+  sscale_y_log10()
+
+```
 
 
+## Analyses Séries Temporelles 
+
+
+```{r fig.height=2.5, fig.width=8.5}
+
+library(ggplot2)
+library(lubridate)
+
+dt = dt %>% group_by(symbol) %>% mutate(growth = (exchange.rate 
+              - first(exchange.rate))/first(exchange.rate)*100)
+
+ggplot(dt) + geom_line(aes(x = date,y = growth,color=symbol),size=1)
+
+```
