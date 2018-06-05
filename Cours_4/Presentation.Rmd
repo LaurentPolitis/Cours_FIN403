@@ -1,0 +1,208 @@
+---
+title: 'Introduction : Data Visualisation'
+author: "Laurent Politis"
+date: "`r format(Sys.Date(),  'Le %d %B %Y')`"
+output:
+  ioslides_presentation:
+    fig_caption: yes
+    highlight: tango
+    incremental: yes
+    logo: image/Logo_Essca.jpg
+  slidy_presentation:
+    highlight: tango
+    incremental: yes
+editor_options:
+  chunk_output_type: inline
+---
+
+## Plan du cours 
+
+- Manipulation de données (Dplyr)
+- Fonction lapply 
+- Séries temporelles (quantmod et lubridates)
+
+
+## Dplyr 
+
+Le principe de ce paquet est d'utiliser des fonctions de haut niveau de manipulation d'objet de données. La syntaxe et la philosophie de ce paquet est similaire au langage SQL. 
+
+
+Il permet de réduire dans la plupart des cas la taille du code écrit gràce à cet objet `%>%` (un opérateur assimilable au `+` dans ggplot2). A l'instar de Ggplot, il possède une grammaire de manipulation de données. Les verbes (les fonctions) de ce paquet permettent de résoudre des problèmes communs de manipulation de données. 
+
+
+## Dplyr 
+
+Nous allons étudier les 5 fonctions de dplyr : `mutate()`, `filter()`, `select()`, `arrange()` et finalement `summarise()`
+
+
+**Source :**
+
+  [Cours de data mining](https://laurentpolitis.github.io/FIN406_2017/docs/data-mining.html)
+  
+  [Présentation  et installation](https://dplyr.tidyverse.org/)
+ 
+  [Introduction](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.htmls) 
+ 
+  [Cours interactif](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial?utm_campaignid=644508384&utm_adgroupid=36650455281&utm_network=g&utm_adpostion=1t1&utm_targetid=kwd-201942240753&utm_loc_interest_ms=&utm_loc_physical_ms=9004373&gclid=CKrczMOizs8CFVdahgod1AAKVA&utm_source=adwords_ppc&utm_campaignid=898687156&utm_adgroupid=48303643819&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=1t1&utm_creative=255798221920&utm_targetid=aud-390929969673:dsa-377762271983&utm_loc_interest_ms=&utm_loc_physical_ms=9056129&gclid=CjwKCAjw6djYBRB8EiwAoAF6oWKVhpCrxxqL46Xv5Mtgqvyeh0BFMu5jxX82l66B0Cfm1XVN_96dUxoCNX0QAvD_BwE) 
+
+
+
+
+
+## Apply function
+
+<center>
+
+  <img src="C:/Users/Laurent/Documents/Cours_FIN403_2018/Cours_4/image/apply_family.png" height="300px" width="300px" />
+
+</center>
+
+
+
+
+## Exemple d'une application 
+
+
+Le but de cet exemple est de télécharger le taux de l'euros avec d'autre devises et d'arranger les données sous forme de data.frame. 
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=F}
+library(tidyquant) 
+dt = c("EUR/USD", "EUR/JPY", "EUR/GBP") %>% 
+tq_get(get = "exchange.rates") 
+df_list = lapply(setNames(object = unique(dt$symbol),
+                          nm = unique(dt$symbol)),
+                 function(y) return( dt %>% 
+                   filter(y == symbol)) %>%
+                   select(exchange.rate))
+#do.call utilsation d'une fonction une liste données
+df_data = do.call(what = "cbind",args = df_list)
+# changement de noms des colonnes de la data frame 
+colnames(df_data) = unique(dt$symbol)
+rownames(df_data) = (dt %>% filter("EUR/USD"==symbol) %>%
+                  select(date))$date
+```
+
+
+## Résulats 
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE}
+library(tidyquant) 
+dt = c("EUR/USD", "EUR/JPY", "EUR/GBP") %>% 
+  tq_get(get = "exchange.rates") 
+ 
+df_list = lapply(setNames(object = unique(dt$symbol),
+                          nm = unique(dt$symbol)),
+                 function(y) return( dt %>% 
+                   filter(y == symbol)) %>%
+                   select(exchange.rate))
+#do.call utilsation d'une fonction une liste donnée 
+df_data = do.call(what = "cbind",args = df_list)
+# changement de noms des colonnes de la data frame 
+colnames(df_data) = unique(dt$symbol)
+# dates 
+rownames(df_data) = (dt %>% filter("EUR/USD"==symbol) %>%
+                  select(date))$date
+
+head(df_data)
+
+```
+
+## Apply 
+
+Calcul sur des données avec des structures matricielles : 
+
+**Moyenne par colonne **
+
+```{r echo=T, message=FALSE, warning=FALSE,eval=F}
+apply(X =df_data ,MARGIN = 2 ,FUN = mean)
+apply(X =df_data ,MARGIN = 2 ,FUN = function(x) {mean(x)})
+
+```
+
+** Moyenne par ligne**
+
+```{r echo=T, message=FALSE, warning=FALSE,eval=F}
+apply(X =df_data ,MARGIN = 1 ,FUN = mean(x))
+
+```
+
+**Les 2 **
+
+
+```{r echo=T, message=FALSE, warning=FALSE,eval=F}
+apply(X =df_data ,MARGIN = c(1,2) ,FUN = mean(x))
+
+```
+
+
+
+## Apply : Résultats 
+
+Calcul sur des données avec des structures matricielles : 
+
+**Moyenne par colonne**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+apply(X =df_data ,MARGIN = 2 ,FUN = mean)
+```
+
+** Moyenne par ligne**
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+head(apply(X =df_data ,MARGIN = 1 ,FUN = mean),n = 5)
+
+```
+
+**Les 2 **
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+head(apply(X =df_data ,MARGIN = c(1,2) ,FUN = mean),n=2)
+
+```
+
+## sapply et lapply 
+
+En fonction de la situation, vous pouvez utiliser soit sapply pour un format vectoriel et lapply pour des listes. 
+```{r}
+head(sapply(df_data$`EUR/USD`, function(x) 
+  abs((x-mean(df_data$`EUR/USD`))/sd(df_data$`EUR/USD`))))
+
+```
+
+```{r}
+head(lapply(df_data$`EUR/USD`, function(x) 
+  abs((x-mean(df_data$`EUR/USD`))/sd(df_data$`EUR/USD`))))
+
+```
+
+
+## Parallelisation 
+
+Si vous souhaitez augmenter la vitesse de votre code, vous pouvez utiliser le package parallel sur linux.
+
+```{r}
+library(parallel)
+n = 1
+time = Sys.time()
+a = mclapply(df_data$`EUR/USD`, FUN = function(x) 
+  abs((x-mean(df_data$`EUR/USD`))/sd(df_data$`EUR/USD`)),
+  mc.cores =n)
+
+print(paste("Avec Parallelisation",Sys.time()-time))
+      
+    
+
+```
+
+
+
+
+
+
+
+
+
