@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = T)
 
 
 ## Plan du module
-Ce cours est un TD informatique constitué d'exemples et d'exercices du langage de programmation R sur la data visualisation.
+Ce cours est un TD informatique constitue d'exemples et d'exercices du langage de programmation R sur la data visualisation.
 Les différents points abordés durant ces 15 heures de cours sont : 
 
 - Extraction et manipulation des données (data mining)
@@ -60,8 +60,10 @@ https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordes
 ## Contexte  
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+#install.packages(c("tm", "SnowballC", "wordcloud", "RColorBrewer", "RCurl", "XML"))
+
 source('http://www.sthda.com/upload/rquery_wordcloud.r')
-filePath <- "https://en.wikipedia.org/wiki/Big_data"
+filePath <- "https://www.r-bloggers.com/"
 res<-rquery.wordcloud(filePath, type ="url", lang = "english")
 ```
 https://fr.wikipedia.org/wiki/Big_data
@@ -289,7 +291,7 @@ http://cran.r-project.org/bin/macosx/ et télécharger la dernières version de R
 
  http://www.rstudio.com/ide/ pour télécharger la dernières version et installer l'environnement de travail *R studio* en suivant les indications du site
 
-##  Pour ?tre bon en R ...
+##  Pour être bon en R ...
 
 
 
@@ -588,51 +590,55 @@ Puis vérifier que les données sont sous le bon format
 ## Importer des données sous console R 
 
 ```{r importer,  echo=TRUE, message=TRUE}
-read.csv("C:/Users/Laurent/Downloads/INSEE-29_000067684_A.csv")
+#install.packages("Quandl")
+# library(Quandl)
+# Quandl("CITYPOP/CITY_ANGERSPAYFRANCE")
+library(readr)
+angers_pop <- read_table2("data/angers_pop.csv")
 
-class(read.csv("C:/Users/Laurent/Downloads/INSEE-29_000067684_A.csv"))
+
+class(angers_pop)
 
 ```
 
 
 ## Visualiser les données
 ```{r view,echo=TRUE, message=TRUE,eval=FALSE}
-INSEE.29_000067684_A <- read.csv("C:/Users/Laurent/Downloads/
-                                 INSEE-29_000067684_A.csv")
+INSEE.29_000067684_A <- angers_pop
 View(INSEE.29_000067684_A)
 ```
 
 ```{r,echo=FALSE, message=FALSE,eval=TRUE}
-INSEE.29_000067684_A <- read.csv("C:/Users/Laurent/Downloads/INSEE-29_000067684_A.csv")
+INSEE.29_000067684_A <- angers_pop
 ```
 <img src="C:/Users/Laurent/Pictures/IDE8.png" height="280px" width="300px" />
 
 ## Visualiser les données
 ```{r plot,echo=TRUE, message=TRUE,eval=TRUE}
-plot(x = as.Date(INSEE.29_000067684_A$Date),y=
-       INSEE.29_000067684_A$Value)
+plot(x = as.Date(INSEE.29_000067684_A$Year),y=
+       INSEE.29_000067684_A$Population)
 
 ```
 
 ## Changer  le style du graphe
 ```{r plot1,echo=TRUE, message=TRUE,eval=TRUE}
-plot(x = as.Date(INSEE.29_000067684_A$Date),y=
-       INSEE.29_000067684_A$Value,type = "l")
+plot(x = as.Date(INSEE.29_000067684_A$Year),y=
+       INSEE.29_000067684_A$Population,type = "l")
 
 ```
 
 ## Changer  le style du graphe
 ```{r plot3,echo=TRUE, message=TRUE,eval=TRUE}
-plot(x = as.Date(INSEE.29_000067684_A$Date),y=
-       INSEE.29_000067684_A$Value,type = "b")
+plot(x = as.Date(INSEE.29_000067684_A$Year),y=
+       INSEE.29_000067684_A$Population,type = "b")
 
 ```
 
 
 ## Légendes
 ```{r plot2,echo=TRUE, message=TRUE,eval=TRUE}
-plot(x = as.Date(INSEE.29_000067684_A$Date),y=
-       INSEE.29_000067684_A$Value,type = "l",xlab ="Dates" ,
+plot(x = as.Date(INSEE.29_000067684_A$Year),y=
+       INSEE.29_000067684_A$Population,type = "l",xlab ="Dates" ,
      ylab="populations")
 
 ```
