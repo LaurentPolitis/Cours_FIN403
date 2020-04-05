@@ -453,7 +453,7 @@ class(df[,"lettres"])
 
 
 ## Matrices Vs Data frames
-Quelle est l'avantange d'une matrice par rapport à une data frame ? 
+Quelle est l'avantange d'une data.frame par rapport à une Matrice ? 
 ```{r sizedataframe, message=TRUE, include=FALSE}
 
 object.size(mat)
