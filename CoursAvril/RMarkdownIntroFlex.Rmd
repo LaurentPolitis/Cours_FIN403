@@ -1,0 +1,223 @@
+---
+title: "FIN403 2020"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+R  Installation  locale 
+===================================== 
+    
+
+Nous allons localement installer R et l'éditeur Rstudio, afin de poursuivre le cours FIN 403 depuis chez vous. 
+
+
+1. **naviguer sur le [slide du premier cours](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#12)** vous trouverez un tuto  
+2. **Installer R ** grâce au site suivant https://cloud.r-project.org/
+3. Puis, **Installer Rstudio** l'éditeur de R grâce au site suivant  https://rstudio.com/products/rstudio/download/#download 
+4. Tester votre installation en allant dans la console de RStudio  pour [rappel le slide présentant les différentes fenêtres de Rstudio](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#28) 
+5. Puis, **Installer** la package `ggplot2`. 
+6. Charger la library ggplot2 et créer deux vecteurs `a` et `b` pour [rappel](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#30) qui permettent de dessiner le graphe ci-dessous. 
+7. Faire un Nuage de points à l'aide du package ggplot2, ou de la fonction de base afin de retrouver les  graphes ci-dessus. 
+8. Refaire le même graphe à l'aide du data frame au lieu de deux vecteurs. 
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+### TD installation de l'environement R function qplot
+
+```{r echo=FALSE}
+a = seq(0,30,by=0.1)
+b= sin(a)
+df = data.frame(a,b)
+#ggplot2::qplot(a,b,geom = c("point"))
+library(ggplot2)
+ggplot(data = df)+geom_point(aes(a,b))
+```
+
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+### TD installation de R function plot 
+```{r echo=FALSE}
+a = seq(0,30,by=0.1)
+b= sin(a)
+plot(a,b)
+```
+
+
+
+R Markdown Introduction {.storyboard}
+===================================== 
+    
+### Table  {data-commentary-width=600}
+
+```{r cars}
+summary(cars)
+```
+
+***
+
+Cette page est un document "R Markdown". Markdown est un simple langage de syntaxe  qui permet la génération de code sous format  HTML, PDF, et MS Word documents.
+
+Ce n’est pas un outil d’édition comme word *«What you see is what you get»* **WYSIWYG** via une interface graphique. A l’opposé Markdown est un code qui peut être catégorisé comme un outil *WYSIWYM* *«What you see is what you mean»*. 
+
+Il faut en quelque sorte le compiler afin de voir le résultats de votre création à l’instar de Word Microsoft. L’avantage de R markdown réside dans la possibilité d’ajouter facilement du  code R à l’intérieur de votre document et l’automatisation de rapport grâce au notion de fonction et d boucel que nous avons a vu à la fin du cours dernier. 
+
+ Pour plus de détail, n’hésitez pas à visiter le site suivant afin de découvrir ce package R <http://rmarkdown.rstudio.com>.
+
+Quand vous cliquez sur le bouton **Knit** bouton un document  va être  créé et vous pouvez facilement ajouté du code R dedans comme ci-dessous à l'aide du boutton `Insert` : 
+
+
+### Plot {data-commentary-width=600}
+
+```{r plot}
+plot(cars)
+```
+
+
+*** 
+Vous pouvez faire la même chose avec un graphe 
+
+### html widget {data-commentary-width=600}
+
+```{r car}
+DT::datatable(cars)
+```
+
+
+*** 
+Vous pouvez faire la même chose avec un graphe interactif grâce au  package `DT` pour plus d'information <https://rstudio.github.io/DT/>
+
+### Des images {data-commentary-width=600}
+
+```
+![impressionant](https://media.giphy.com/media/w9xG5hsxZlqtevPlJQ/giphy.gif)
+
+```
+
+***
+
+![impressionant](https://media.giphy.com/media/w9xG5hsxZlqtevPlJQ/giphy.gif)
+
+### Des listes {data-commentary-width=600}
+
+```
+Nous allons parler durant ce cours de :
+
+* Installation de R 
+* Rmarkdown 
+* data mining de données de pollution 
+
+```
+
+***
+
+Nous allons parler durant ce cours de :
+
+* l'installation de R et Rstudio
+* Rmarkdown 
+* data mining de données de pollution 
+* et un peu de data visualisation 
+
+
+### Des Videos {data-commentary-width=800}
+```
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rlR4PJn8b8I" frameborder="0" allowfullscreen></iframe>
+
+
+```
+
+*** 
+<iframe width="860" height="415" src="https://www.youtube.com/embed/rlR4PJn8b8I" frameborder="0"></iframe>
+
+
+
+
+Data Mining & Visualisation 
+===================================== 
+
+***Fin du  dernier cours***
+
+1. Coder une fonction factorielle grâce à une boucle `for`. 
+2. Utiliser votre fonction pour calculer les factorielles entre $x \, \epsilon \, [0,30]$
+3. Vérifier le résultat de votre fonction à l'aide d'un graphe  $x \, \epsilon \, [0,30]$ et $y = x!$. Pour ce faire, utiliser deux vecteurs x et y, ainsi que votre fonction.  
+4. Importer les [données de la ville d'angers](https://github.com/LaurentPolitis/Cours_FIN403_2018/blob/master/Cours_1/data/angers_pop.csv) 
+5. Tracer cette série temporelle en fonction des dates.
+
+***New TD***
+
+
+On va découvrir comment traiter des données de séries temporelles de pollution et de météo à Shanghai. Pour ce faire, nous allons explorer le fichier csv `pollution_shanghai.csv`. 
+
+***Etape de Data Mining***
+
+1. Créer un document Rmarkdown avec votre nom et prénom. Ajouter les lignes de commandes que vous allez lancer dans ce TD. 
+2. Importer les données. Pour cela, vous pouvez utiliser les fonctions `read.table()`, `read.csv()` et `readr::read_csv()` ou [l'interface graphique pour rappel](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#47).  
+3. Quel est le type/class de l'objet que vous avez téléchargé et importé ? 
+4. Même chose pour les éléments colonnes de cet objet ? Pensez à utiliser une boucle `for`. 
+5. Explorer vos données à l'aide des fonctions `head`, `tail`,`View` et `Summary` ? 
+6. Tracer des graphes de ces séries temporelles à l'aide de ggplot2. Pour faire cela nous allons apprendre les bases de [ggplot](https://laurentpolitis.github.io/FIN406_2017/docs/)
+7. Données récupérées via une API définition et présentation dans ce cour. https://laurentpolitis.github.io/FIN406_2017/docs/data-visualisation.html
+
+
+
+
+
+
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+### Angers
+
+```{r , echo=FALSE}
+library(ggplot2)
+library(readr)
+
+library(patchwork)
+
+
+
+
+p3 = qplot(1:3000/100,gamma((1:3000)/100)) + scale_y_log10()+ ggthemes::theme_fivethirtyeight() + labs(title="Fonction gamma")
+
+
+
+angers_pop <- read_delim("https://raw.githubusercontent.com/LaurentPolitis/Cours_FIN403_2018/master/Cours_1/data/angers_pop.csv", 
+    "\t", escape_double = FALSE, trim_ws = TRUE)
+
+p4 = qplot(data = angers_pop, x=Year,y=Population, geom = c("point","smooth"))+ ggthemes::theme_fivethirtyeight() + labs(title="Démographie Angers")
+
+library(readr)
+library(dplyr)
+
+p3+p4
+```
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+### TD Pollution 
+
+
+```{r , echo=FALSE}
+library(readr)
+library(dplyr)
+pollution_shanghai <- read_delim("~/R/Cours_FIN403_2018/CoursAvril/data/pollution_Wuhan.csv", 
+    ";", escape_double = FALSE, trim_ws = TRUE)
+
+p1 = ggplot(data = pollution_shanghai %>% mutate(year=lubridate::year(validdate) , month = lubridate::month(validdate))
+       %>% filter(month %in% c(1,2,3,4))) + geom_boxplot(aes(x=as.character(year),y = `pm2p5:ugm3`)) +
+    facet_wrap(~month)+ labs(x="Year",title = "Wuhan PM 2.5 pollution", subtitle ="by month from CAMS")
+
+p2 = ggplot(data = pollution_shanghai %>% mutate(year=lubridate::year(validdate) , month = lubridate::month(validdate))
+       %>% filter(month %in% c(1,2,3,4))) + geom_boxplot(aes(x=as.character(year),y = `no2:ugm3`)) +
+    facet_wrap(~month)+ labs(x="Year",title = "Wuhan NO2 pollution", subtitle ="by month from CAMS")
+p1+p2
+```
+
+
+
