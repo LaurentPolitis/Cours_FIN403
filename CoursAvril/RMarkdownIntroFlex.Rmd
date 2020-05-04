@@ -162,9 +162,8 @@ On va découvrir comment traiter des données de séries temporelles de pollutio
 4. Même chose pour les éléments colonnes de cet objet ? Pensez à utiliser une boucle `for`. 
 5. Explorer vos données à l'aide des fonctions `head`, `tail`,`View` et `Summary` ? 
 6. Tracer des graphes de ces séries temporelles à l'aide de ggplot2. Pour faire cela nous allons apprendre les bases de [ggplot](https://laurentpolitis.github.io/FIN406_2017/docs/)
-7. Données récupérées via une API définition et présentation dans ce cour. https://laurentpolitis.github.io/FIN406_2017/docs/data-visualisation.html
-
-
+7. Données récupérées via une API définition et présentation dans ce cour. 
+https://github.com/LaurentPolitis/data_science_intro/blob/master/Api_Notebook.ipynb
 
 
 
