@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = T)
 Ce cours est un TD de mise en pratique de data science/visualisation. Pour ce faire, nous utiliserons un langage interprété de haut niveau statistique nommé R. Les différents points abordés durant ces 15 heures de cours sont :
 
 -   Extraction et manipulation des données (data mining)
--   Représentations graphiques
+-   Représentations graphiques (data visualisation)
 -   Valorisations de ces données par le biais de méthodes statistiques et de visualisations
 -   Représentations graphiques interactives (html widget, plotly ...)
 -   Shiny et R markdown création d'application et de rapport interactif
@@ -37,7 +37,9 @@ Ce cours est un TD de mise en pratique de data science/visualisation. Pour ce fa
 
 -   présentation de vos résultats en équipe d'un sujet de data science en lien avec votre sujet de mémoire
 -   script R de data mining et de data visualisation
--   Questionnaire ( devoir sur table )
+-   Questionnaire (devoir sur table)
+
+<http://laurentpolitis.github.io/Data_Viz_Fin403/Cours_20_avril.html>
 
 ## Plan de ce cours
 
@@ -155,11 +157,11 @@ Définition
 
 ## Exemple
 
--   <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png" height="250px" width="800px"/> [un des meilleurs graphiques statistiques](https://fr.wikipedia.org/wiki/Charles_Joseph_Minard)
+-   <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png" height="250px" width="800px"/> [une des premières data visualisation](https://fr.wikipedia.org/wiki/Charles_Joseph_Minard)
 
 -   <http://esri.github.io/wind-js/> SIG
 
--   <http://flowingdata.com/2016/01/05/causes-of-death/> s?ries temporelles
+-   <https://showyourstripes.info/> séries temporelles
 
 -   <http://www.nytimes.com/interactive/2015/03/19/upshot/3d-yield-curve-economic-growth.html> 3D
 
@@ -207,7 +209,7 @@ Pour rappel, Clinton a perdu l'élection 242 "county" contre 2,232 pour Trump. C
 
 ## Un graphique vaut mille mots
 
-```{r motss}
+```{r motss, echo=FALSE, message=FALSE}
 library(ggplot2)
 df = data.frame(x=rnorm(1:84),y=rnorm(1:84),
                 lettres=LETTERS[rep(seq( from = 1, to = 28 ),3)])
@@ -221,12 +223,12 @@ ggplot(df,aes(x=x,y=y))+geom_text(aes(label=lettres))
 
 ## Combien y a t il de A ?
 
-```{r mot1}
+```{r mot1, fig.height=4}
 ggplot(df,aes(x=x,y=y,colour=test,size=test))+geom_text(aes(label=lettres))+labs(colour="",size="")+scale_color_manual(values = c("red","black"))+scale_size_manual(values = c(6.5,4))
 
 ```
 
--   Réponse : 9
+-   Réponse : `r sum(df$lettres == "A")`
 
 <!-- ## Regardons le code  -->
 
@@ -257,10 +259,16 @@ ggplot(df,aes(x=x,y=y,colour=test,size=test))+geom_text(aes(label=lettres))+labs
 ## Pourquoi R
 
 -   Open source & Gratuit
+
 -   Facile à installer sur les systèmes d'exploitations Linux, Windows et Apple
+
 -   Une très grosse communauté de développeurs et d'utilisateurs
+
 -   Facile à utiliser pour des non-programmeurs pour des calculs statistiques
--   Possibilité de créer des illustrations, applications web et même la présentation que vous lisez actuellement <img src="image/run_Paris.png" height="200px" width="400px"/>
+
+-   Possibilité de créer des illustrations, applications web et même la présentation que vous lisez actuellement
+
+    ![densité des coureurs à Paris utilisant une montre connecté](image/run_Paris.png){width="300" height="150"}
 
 ## Installation de R
 
@@ -287,7 +295,7 @@ télécharger la dernière version de R en fonction de votre ordinateur 32 bit o
     -   commandes en console R `??` et `?`
     -   utiliser un environnement de travail intégré (IDE) comme Rstudio (facilite la programmation, auto indentation, variables historiques, etc ...)
 
-## Présentation de Rstudio
+## Présentation de l'IDE Rstudio 
 
 <img src="image/IDE.PNG" height="400px" width="800px"/>
 
@@ -313,7 +321,7 @@ print(paste("pi is equal to",b))
 
 ```
 
-## Comment l'exécuter ?
+## Comment l'exécuter ? 
 
 A l'aide de la console R :
 
@@ -330,8 +338,8 @@ Ce qui a changé
 
 <img src="image/IDE4.PNG" height="300px" width="800px"/>
 
--   Ajout de la commande lanc?e dans la console R dans l'historique
--   Ajout de la variable `a` dans l'environnement R (commande ls() pour lister les objets)
+-   Ajout de la commande lancée dans l'historique
+-   Ajout des variables `a` et `b` dans l'environnement R (commande ls() pour lister les objets)
 
 ## Les variables dans R
 
@@ -354,15 +362,18 @@ f <- c(1,"a","d",4)
 
 ```{r fonction_vec, echo=TRUE, message=TRUE,eval=TRUE}
 length(x = c)
-
 names(x=e)
-
 # accéder à un élement
 c[1]
 e["a"]
 # ou plusieurs
 c[1:2]
 e[c("a","c")]
+```
+
+```{python}
+c = [1,2,3,4]
+len(c)
 ```
 
 ## Les facteurs
@@ -434,9 +445,7 @@ class(df[,"lettres"])
 Quelle est l'avantange d'une matrice par rapport à une data frame ?
 
 ```{r sizedataframe, message=TRUE, include=FALSE}
-
 object.size(mat)
-
 object.size(as.data.frame(mat))
 
 ```
@@ -445,7 +454,6 @@ object.size(as.data.frame(mat))
 
 ```{r as, echo=TRUE, message=TRUE}
 as.matrix(df)
-
 as.numeric(f)
 
 ```
@@ -468,14 +476,14 @@ les commandes matrix(), cbind(), data.frame() sont des fonctions codées
 [<img src="image/fonction_R.png" height="150px" width="600px"/>](http://biol09.biol.umontreal.ca/BIO2041e/CreerFonctionR.pdf)
 
 -   un objet R
--   des commandes R ?crites dans un fichier qui effectuent une tâche prédéfinie
+-   des commandes R écrites dans un fichier qui effectuent une tâche prédéfinie
 -   permet de faire automatiquement la même tâche plusieurs fois
 -   garder un programme plus lisible
 -   un gain de temps à long terme
 
 ## Ecrire votre première fonction
 
-écrire le même code que précédemment sous forme de fonction dans un nouveau fichier hello_fun.R
+écrire le même code que précédemment (page 27 de la présentation) sous forme de fonction dans un nouveau fichier hello_fun.R
 
 ```{r fonction2, echo=TRUE, message=TRUE}
 hello <-function(texte=NULL){   # argument ou données d'entrées
@@ -491,7 +499,7 @@ return(texte)  #  return  renvoie le résultat de la fonction
 
 ## Un peu plus compliqué
 
-un petit ajout le nom de l'utilisateur
+Un petit ajout le nom de l'utilisateur
 
 ```{r fonction1, echo=TRUE, message=TRUE}
 hello <-function(texte=NULL){  
@@ -499,14 +507,14 @@ hello <-function(texte=NULL){
   # on récupére le nom de l'utilisateur 
  nom <- Sys.getenv("USERNAME") # fonction trouvée via une recherche web
    # on colle le nom de l'utilisateur
- texte <- paste(nom,texte)
+ texte <- paste(texte,"and",nom)
  
 return(texte)  #  return  renvoie le résultat de la fonction  
 }
 
- source("cours_data_visualisation/hello_fun2.R")
+ # source("cours_data_visualisation/hello_fun2.R")
 
- hello("hello world !")
+ hello("hello world")
 ```
 
 ## Fonction cor()
@@ -519,42 +527,51 @@ nrow
 cor(rnorm(n = 100,mean = 1,sd = 0.25),rnorm(n = 100,mean = 1,sd = 25))
 ```
 
-## Les boucles
+## Les boucles 
 
-Calculer $n!$ pour $n=10$.
+Calculer $n!$ avec $n=10$.
 
 ```{r for, echo=TRUE, fig.height=4, message=FALSE, warning=FALSE, paged.print=FALSE}
 factorielle <-1
 for (i in seq(1, 10)){
   factorielle <- factorielle*i
 }
-    
 print(factorielle)
 
 ```
+
+$$
+n! = \prod_{1\leqslant i\leqslant n} i = 1\times 2\times 3\times \ldots \times (n-1) \times n.
+$$
 
 ## Vérification
 
 On vérifie avec la fonction déjà codée.
 
+$$
+\Gamma(n) = (n-1)!\qquad n \in \mathbb{N}_0
+$$
+
 ```{r echo=TRUE}
 factorial(10)
+
 
 
 ```
 
 ```{r echo=FALSE, fig.height=3}
 
-qplot(1:2000/100,gamma((1:2000)/100)) + scale_y_log10()+ ggthemes::theme_fivethirtyeight() + labs(title="Fonction gamma")
+  qplot(1:1000/100,gamma((1:1000)/100)) + ggthemes::theme_fivethirtyeight() + labs(title="Fonction gamma")+ annotate(x=9,y=gamma(10),label=gamma(10),geom="text",col="red")+
+    geom_point(aes(x=10,y=gamma(10)),colour="red")+scale_y_log10()
 ```
 
 ## Importer des données
 
-Importer des données via [quandl](https://www.quandl.com/)
+Importer des données via git_hub autrefois quandl
 
 Par exemple l'évolution de la population à Angers
 
-<https://www.quandl.com/data/INSEE/29_000067684_A-Demography-Municipal-population-at-the-census-Angers>
+<https://raw.githubusercontent.com/LaurentPolitis/Cours_FIN403/master/Cours_1/data/angers_pop.csv>
 
 -   Télécharger les données sous format .csv
 -   ouvrir les données via R méthode graphique ![Import Dataset \> from Local File](image/IDE5.PNG)
@@ -574,8 +591,8 @@ Puis vérifier que les données sont sous le bon format
 # library(Quandl)
 # Quandl("CITYPOP/CITY_ANGERSPAYFRANCE")
 library(readr)
-angers_pop <- read_table2("data/angers_pop.csv")
 
+angers_pop <- read_delim("https://raw.githubusercontent.com/LaurentPolitis/Cours_FIN403/master/Cours_1/data/angers_pop.csv", "\t", escape_double = FALSE, trim_ws = TRUE)
 
 class(angers_pop)
 
@@ -628,3 +645,228 @@ plot(x = as.Date(INSEE.29_000067684_A$Year),y=
 ```
 
 C'était l'outil classique de création de graphe de R "plot()". Le prochain cours je vous présenterais "la grammaire graphique" avec ggplot2.
+
+## Introduction ggplot
+Les graphiques que nous allons créer aujourd'hui sont : 
+
+ 
+* Les boites à moustaches 
+* Les histogrammes 
+* Les courbes de densité
+* Nuage de points, séries temporelles et graphiques diagnostics de modélisation statistiques...
+
+## Rappel Data mining 
+Les  données utilisées sont la population des communes de 1968 à 2012 : 
+
+http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-serie-historique
+
+Une fonction sert à les nettoyer 
+```{r datamining}
+setwd("~/data-visualisationFIN403/") # pour se placer dans le répertoire courant 
+
+source("prog/data_mining_communes_fonction.R") # charge la fonction data_import()
+
+population_ville = data_import() 
+
+View(population_ville)
+
+```
+
+
+## GGplot 
+
+Une librairie R de visualisation de données développée par Hadley Wickham en 2005 selon
+les principes développés par Leland Wilkinson dans son ouvrage [The Grammar of Graphics](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)
+
+* Plot = data + Aesthetics + Geometry 
+* *Aesthetics* (aes) :  les couleurs, les tailles, les formes, les labels mais aussi les données en x et en y
+* *Geometry* (geom_ ...) va regrouper les options concernant les types de graphique (line, point, histogramme, heatmap, boxplot, etc.)
+* peut-être stocké dans l'objet 
+
+```{r ggplot2,eval=FALSE}
+install.packages(ggplot2)
+library(ggplot2)
+
+```
+
+
+
+##  Les boites à moustaches 
+
+* moyen rapide de résumer une série statistique quantitative
+* inventée en 1977 par John Tukey
+
+
+```{r boxplots,eval=FALSE}
+library(ggplot2)
+ggplot(population_ville) + geom_boxplot(aes(x="France",y= `Population 2012`))
+
+```
+
+##  Les boites à moustaches exemple
+
+```{r boxplots1,echo=FALSE}
+library(ggplot2)
+ggplot(population_ville) + geom_boxplot(aes(x="France",y= `Population 2012`))
+
+```
+
+## Modifié l'échelle des axes 
+
+```{r}
+ggplot(population_ville) + geom_boxplot(aes(`Population 2012`,x="ville")) +
+ scale_y_sqrt()
+```
+
+## Echelle en log
+
+
+```{r,warning=FALSE}
+ggplot(population_ville) + geom_boxplot(aes(`Population 2012`,x="ville")) +
+ scale_y_log10()
+```
+
+## Faire ressortir la ville d'Angers
+```{r,warning=FALSE, fig.height=3.5, fig.width=5, warning=FALSE}
+ggplot(population_ville) + geom_boxplot(aes(y=`Population 2012`,x="France")) + 
+  scale_y_log10() + 
+  geom_point(data= population_ville[population_ville$Communes=="Angers",],
+             aes(y = `Population 2012` ,x='France'),color="red",size=4)
+
+```
+
+
+## Sans GGplot
+```{r,warning=FALSE,  warning=FALSE}
+boxplot(population_ville$`Population 2012`,log="y", ylim=c(100,100000000))
+
+```
+
+##  Par régions 
+```{r,warning=FALSE, fig.height=4.5, fig.width=9, warning=FALSE}
+ggplot(population_ville) + geom_boxplot(aes(y=`Population 2012`,x=Region,group=Region))+
+  scale_y_log10() + coord_flip()
+```
+
+##   Mettre en valeur deux types de population 
+```{r,warning=FALSE, fig.height=3.5, fig.width=8, warning=FALSE}
+population_ville$dom_tom = population_ville$Region %in% 
+  c("MARTINIQUE","GUYANE","GUADELOUPE","MARTINIQUE","LA REUNION")
+p = ggplot(population_ville,aes(y=`Population 2012`,x=Region,group=Region)) +  scale_y_log10() + 
+  coord_flip()
+ p+ geom_boxplot(aes(fill=dom_tom))
+```
+
+##  Des Box plots plus exotiques 
+```{r,warning=FALSE, fig.height=5, fig.width=8, warning=FALSE}
+
+p + geom_violin()
+
+```
+
+##  Des Box plots plus exotiques 
+```{r,warning=FALSE, fig.height=5, fig.width=8, warning=FALSE}
+
+p  +geom_jitter(alpha=0.1) + geom_boxplot(alpha=0.7)
+
+```
+
+
+
+## Courbe de densité de probabilité
+```{r density,warning=FALSE}
+ggplot(population_ville) + geom_density(aes(x = `Population 2012`)) 
+
+```
+
+## Echelles
+```{r density1,warning=FALSE}
+ggplot(population_ville) + geom_density(aes(x = `Population 2012`)) +scale_x_log10()
+
+```
+
+##  plusieurs graphes en un même
+```{r density2,fig.width=11,fig.height=4,warning=FALSE}
+ggplot(population_ville) + geom_density(aes(x = `Population 2012`,
+                                            fill="kernel density \n estimation")) +
+  scale_x_log10() +facet_wrap(facets=~Region)
+
+```
+
+
+## Les histogrammes 
+
+```{r histogramme}
+ggplot(population_ville,aes(x=`Population 2012`)) + geom_histogram(binwidth = 10000)
+
+```
+
+## Zoom sur une région 
+
+```{r histogramme1,fig.height=4.5}
+ggplot(population_ville[population_ville$Region=="BRETAGNE",],aes(x=`Population 2012`,fill=Departement)) +
+  geom_histogram(binwidth = 1000) +
+  scale_y_sqrt()+facet_wrap(facets = ~Departement)
+```
+
+## Les séries temporelles 
+
+```{r timeseries,warning=FALSE,fig.height=3,fig.width=10,,message=FALSE}
+library(reshape2)
+tmp=population_ville[population_ville$Region=="PAYS DE LA LOIRE",c(3,4:10)]
+tmp.m=melt(tmp)
+tmp.m$variable=as.numeric(substr(x = tmp.m$variable,12,15))
+ggplot(tmp.m) + geom_line(aes(x=as.Date(paste(tmp.m$variable,"-01-01",sep="")),y=value,group=Communes))
+```
+
+
+## rendre visible le graphique 
+
+```{r timeseries1,eval=FALSE}
+
+tmp.m$Angers=tmp.m$Communes=="Angers" #"#CFCDCD", "#FFFFFF"
+
+tmp.m=tmp.m[tmp.m$value>15000,]
+
+ggplot(tmp.m) + geom_line(aes(x=as.Date(paste(tmp.m$variable,"-01-01",sep="")),
+                              y=value,group=Communes,colour=Angers,size=Angers))+
+  scale_y_sqrt()  +
+scale_color_manual(values=c("#5E5C57", "red"))+
+  scale_size_manual(values=c(1, 3))+
+  geom_text(data=tmp.m[tmp.m$variable==2012,],aes(x = as.Date(paste(2012,"-01-01",sep=""))
+,y=(value),label=Communes))
+
+```
+## souligné 
+
+```{r timeseries2,echo=FALSE}
+
+tmp.m$Angers=tmp.m$Communes=="Angers" #"#CFCDCD", "#FFFFFF"
+
+tmp.m=tmp.m[tmp.m$value>15000,]
+
+ggplot(tmp.m) + geom_line(aes(x=as.Date(paste(tmp.m$variable,"-01-01",sep="")),
+                              y=value,group=Communes,colour=Angers,size=Angers))+
+  scale_y_sqrt()  +
+scale_color_manual(values=c("#5E5C57", "red"))+
+  scale_size_manual(values=c(1, 3))+
+  geom_text(data=tmp.m[tmp.m$variable==2012,],aes(x = as.Date(paste(2012,"-01-01",sep=""))
+,y=(value),label=Communes))
+
+```
+
+## Graphiques et modélisation
+
+```{r smooth}
+ggplot(data = tmp.m[tmp.m$Communes=="Angers",], aes(x = variable,  y =value)) +
+  geom_point() +geom_smooth()
+```
+
+## Tendances à la hausse
+
+```{r smooth1}
+ggplot(data = tmp.m[tmp.m$Communes=="Angers",], aes(x = variable,  y =value)) +
+  geom_point() +geom_smooth(method = "lm")
+```
+
+
