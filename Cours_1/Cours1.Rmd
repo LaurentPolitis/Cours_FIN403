@@ -659,9 +659,9 @@ Les graphiques que nous allons créer aujourd'hui sont :
 
 Les données utilisées sont la population des communes de 1968 à 2012 :
 
-<http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=base-cc-serie-historique>
+<http://www.insee.fr/>
 
-Une fonction sert à les nettoyer
+La fonction ci-dessous permet de la télécharger.
 
 ```{r datamining}
 # setwd("~/data-visualisationFIN403/") # pour se placer dans le répertoire courant 
@@ -708,7 +708,7 @@ ggplot(population_ville) + geom_boxplot(aes(x="France",y= `Population en 2012 (p
 
 ```
 
-## Modifi? l'échelle des axes
+## Modifier l'échelle des axes
 
 ```{r}
 ggplot(population_ville) + geom_boxplot(aes(`Population en 2012 (princ)`,x="ville"))+
