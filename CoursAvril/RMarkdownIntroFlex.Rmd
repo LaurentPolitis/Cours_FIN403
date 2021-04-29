@@ -1,5 +1,5 @@
 ---
-title: "FIN403 2020"
+title: "FIN403 2021"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -16,15 +16,20 @@ R  Installation  locale
 
 Nous allons localement installer R et l'éditeur Rstudio, afin de poursuivre le cours FIN 403 depuis chez vous. 
 
+#### Installation de votre environement de travail 
 
 1. **naviguer sur le [slide du premier cours](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#12)** vous trouverez un tuto  
 2. **Installer R ** grâce au site suivant https://cloud.r-project.org/
 3. Puis, **Installer Rstudio** l'éditeur de R grâce au site suivant  https://rstudio.com/products/rstudio/download/#download 
 4. Tester votre installation en allant dans la console de RStudio  pour [rappel le slide présentant les différentes fenêtres de Rstudio](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#28) 
 5. Puis, **Installer** la package `ggplot2`. 
-6. Charger la library ggplot2 et créer deux vecteurs `a` et `b` pour [rappel](https://laurentpolitis.github.io/Cours_FIN403_2018/Cours_2020.html#30) qui permettent de dessiner le graphe ci-dessous. 
-7. Faire un Nuage de points à l'aide du package ggplot2, ou de la fonction de base afin de retrouver les  graphes ci-dessus. 
-8. Refaire le même graphe à l'aide du data frame au lieu de deux vecteurs. 
+
+#### Premiers graphique
+
+
+6. Charger la library ggplot2 et créer une data frame `df` avec comme nom de colonne `a` et `b` pour [rappel](https://laurentpolitis.github.io/Cours_FIN403/Cours1.html#30) afin de de réaliser les graphes ci-dessous, à l'aide des fonctions suivantes `data.frame()` ,`seq()` et `sin()`. Utilisez cette commande `?sin()` et `?seq` afin d'obtenir de l'aide dans la fenêtre en bas à droite de Rstudio. 
+8. Utiliser la fonction `geom_point(aes(x=,y=))` à l'aide du package ggplot2, ou de la fonction de base afin de retrouver les graphes suivants. 
+
 
 Column {data-width=600}
 -----------------------------------------------------------------------
@@ -149,7 +154,7 @@ Data Mining & Visualisation
 4. Importer les [données de la ville d'angers](https://github.com/LaurentPolitis/Cours_FIN403_2018/blob/master/Cours_1/data/angers_pop.csv) 
 5. Tracer cette série temporelle en fonction des dates.
 
-***New TD***
+***TD Pollution***
 
 
 On va découvrir comment traiter des données de séries temporelles de pollution et de météo à Shanghai. Pour ce faire, nous allons explorer le fichier csv `pollution_shanghai.csv`. 
@@ -162,8 +167,7 @@ On va découvrir comment traiter des données de séries temporelles de pollutio
 4. Même chose pour les éléments colonnes de cet objet ? Pensez à utiliser une boucle `for`. 
 5. Explorer vos données à l'aide des fonctions `head`, `tail`,`View` et `Summary` ? 
 6. Tracer des graphes de ces séries temporelles à l'aide de ggplot2. Pour faire cela nous allons apprendre les bases de [ggplot](https://laurentpolitis.github.io/FIN406_2017/docs/)
-7. Données récupérées via une API définition et présentation dans ce cour. 
-https://github.com/LaurentPolitis/data_science_intro/blob/master/Api_Notebook.ipynb
+
 
 
 
@@ -205,7 +209,7 @@ Column {data-width=600}
 ```{r , echo=FALSE}
 library(readr)
 library(dplyr)
-pollution_shanghai <- read_delim("~/R/Cours_FIN403_2018/CoursAvril/data/pollution_Wuhan.csv", 
+pollution_shanghai <- read_delim("data/pollution_Wuhan.csv", 
     ";", escape_double = FALSE, trim_ws = TRUE)
 
 p1 = ggplot(data = pollution_shanghai %>% mutate(year=lubridate::year(validdate) , month = lubridate::month(validdate))
