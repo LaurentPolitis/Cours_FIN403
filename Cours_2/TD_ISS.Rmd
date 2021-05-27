@@ -64,7 +64,7 @@ Nous allons chercher les cordonnées spatiales de la station ISS :
     de la requête, puis la fonction `httr::content()`,qui comme son nom
     l'indique vous donne le contenu du fichier Json.
 
-    ```{r echo=FALSE}
+    ```{r echo=TRUE}
     json = try(httr::GET("http://api.open-notify.org/iss-now.json",format="txt"))
     json
 
@@ -72,7 +72,7 @@ Nous allons chercher les cordonnées spatiales de la station ISS :
 
 4.  Quelle est la classe de l'objet que vous avez récupéré ?
 
-    ```{r echo=FALSE}
+    ```{r echo=TRUE}
     df_json = try(content(json))
     df_json
     ```
@@ -80,7 +80,7 @@ Nous allons chercher les cordonnées spatiales de la station ISS :
 5.  Transformer cet objet en data frame à l'aide de la fonction
     `as.data.frame().`
 
-    ```{r API, echo=FALSE}
+    ```{r API, echo=TRUE}
     #install.packages("devtools")
 
     #devtools::install_github("r-lib/httr")
@@ -96,7 +96,7 @@ Nous allons chercher les cordonnées spatiales de la station ISS :
 6.  Dessiner la position actuelle de la station ISS sur le globe
     terrestre.
 
-```{r echo=FALSE}
+```{r echo=TRUE}
 library(ggplot2)
 
 world <- map_data(map = "world")
@@ -107,10 +107,10 @@ geom_point(data = df_json ,mapping = aes(y= as.numeric(`iss_position.latitude`),
 
 ```
 
-Un graphique un peu plus avancé avec la fonction `geom_quickmap()` &
+Un graphique un peu plus avancé avec la fonction `coord_quickmap()` &
 `geom_polygon()`
 
-```{r map 1 seule position, echo=FALSE}
+```{r map 1 seule position, echo=TRUE}
 library(maps)
 
 
@@ -130,13 +130,13 @@ secondes dans le but de "dessiner" sa trajectoire sur le globe.
 Pour stocker les résultats de la requête nous allons enregistrer cette
 data frame sous un format csv.
 
-Après, le package GGplot2 va nous permettre de faire un graphe sur le
-globe de la position de la station ISS.
+Après, le package GGplot2 va nous permettre de faire un graphe sur la
+surface du globe terrestre de la position de la station ISS.
 
 Enfin, écrivez une boucle for afin pouvoir faire plusieurs requêtes du
 même type.
 
-```{r echo=FALSE}
+```{r echo=TRUE}
 if(file.exists("position.csv")){
   
 } else{
@@ -167,7 +167,7 @@ df <- read_csv("position.csv")
 
 ```
 
-```{r echo=FALSE}
+```{r echo=TRUE}
 df$date = as.POSIXct(df$timestamp,origin = "1970-01-01")
 ggplot_map = ggplot( data = df )
 
@@ -176,10 +176,10 @@ ggplot_map +
 
 ```
 
-Un graphique un peu plus avancé avec la fonction `geom_quickmap()` &
+Un graphique un peu plus avancé avec la fonction `coord_quickmap()` &
 `geom_polygon()`
 
-```{r echo=FALSE}
+```{r echo=TRUE}
 library(maps)
 
 world <- map_data(map = "world")
@@ -190,7 +190,7 @@ geom_point(color="red")
 p
 ```
 
-###  Animation 
+### Animation
 
 Avec la fonction du paquet `gganimate::transition_time()`
 
@@ -202,6 +202,114 @@ p+  transition_time(date)+
        x="Lon",
        y="Lat")
 
+
+
+```
+
+## Utilisation de la fonction lapply
+
+Afin de remplacer la boucle for précédente, nous pouvons utiliser la
+fonction `lapply()`. Pour, cela nous allons créer une fonction, qui
+télécharge la position de l'ISS automatiquement.
+
+```{r}
+
+positionISS <- function(x=NULL,timestep=1) {
+  print(x)
+  Sys.sleep(timestep)
+   json = httr::GET("http://api.open-notify.org/iss-now.json",format="txt")
+  df_json = as.data.frame(httr::content(json),stringsAsFactors = F)
+  df_json$date = as.POSIXct(df_json$timestamp,origin = "1970-01-01")
+
+  return(df_json)
+}
+
+positionISS()
+
+
+
+```
+
+```{r}
+
+list_position = lapply(X= 1:20, FUN = positionISS)
+
+do.call(rbind,list_position)
+
+```
+
+## Application web
+
+A l'aide su package shiny nous pouvons faire application web interactif
+de la position de l'ISS à n'importe quel moment.
+
+```{r}
+
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+
+    # Application title
+    titlePanel("Position ISS"),
+
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("step",
+                        "Number of position that we want to plot:",
+                        min = 1,
+                        max = 50,
+                        value = 10),
+            numericInput("sleep",label = "Break between each step",value = 1)
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+           plotOutput("distPlot")
+        )
+    )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        
+        list_position = lapply(X= 1:input$step, FUN = function(x){
+            positionISS(x = x,timestep = input$sleep)
+        } )
+        df = do.call(rbind,list_position)
+        
+        # draw the histogram with the specified number of bins
+        library(ggplot2)
+        library(maps)
+        
+        world <- map_data(map = "world")
+        p = ggplot(data = df, aes(y= as.numeric(`iss_position.latitude`), x = as.numeric(`iss_position.longitude`) ) ) +
+            geom_polygon(data=world, aes(long, lat, group = group),fill = "black", colour = "grey")+
+            coord_quickmap()+
+            geom_point(color="red")+
+            labs(x="lon",y="lat")
+        
+        p
+        
+    })
+
+}
+
+# Run the application 
+# shinyApp(ui = ui, server = server)
 
 
 ```

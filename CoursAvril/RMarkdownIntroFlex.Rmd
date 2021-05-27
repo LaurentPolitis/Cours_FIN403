@@ -27,7 +27,7 @@ Nous allons localement installer R et l'éditeur Rstudio, afin de poursuivre le 
 #### Premiers graphique
 
 
-6. Charger la library ggplot2 et créer une data frame `df` avec comme nom de colonne `a` et `b` pour [rappel](https://laurentpolitis.github.io/Cours_FIN403/Cours1.html#30) afin de de réaliser les graphes ci-dessous, à l'aide des fonctions suivantes `data.frame()` ,`seq()` et `sin()`. Utilisez cette commande `?sin()` et `?seq` afin d'obtenir de l'aide dans la fenêtre en bas à droite de Rstudio. 
+6. Charger la library ggplot2 et créer une data frame `df` avec comme nom de colonne `a` et `b`, afin de créer les données nécessaires à la réalisation des  graphes ci-dessous, à l'aide des fonctions suivantes `data.frame()` ,`seq()` et `sin()`. Utilisez cette commande `?sin()` et `?seq` afin d'obtenir de l'aide dans la fenêtre en bas à droite de Rstudio. Pour [rappel](https://laurentpolitis.github.io/Cours_FIN403/Cours1.html#30).
 8. Utiliser la fonction `geom_point(aes(x=,y=))` à l'aide du package ggplot2, ou de la fonction de base afin de retrouver les graphes suivants. 
 
 
