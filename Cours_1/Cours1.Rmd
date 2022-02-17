@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = T)
 
 ## Plan du module
 
-Ce cours est un TD de data science/visualisation. Pour ce faire, nous utiliserons un langage interprété de haut niveau statistique **R** et l'environnement de développement intégré *(EDI fr, IDE en)* **Rstudio**. Les différents points abordés durant ces 15 heures de cours sont:
+Ce cours est un TD d'introduction à la data science/visualisation. Pour ce faire, nous utiliserons un langage interprété de haut niveau statistique **R** et l'environnement de développement intégré *(EDI fr, IDE en)* **Rstudio**. Les différents points abordés durant ces 15 heures de cours sont:
 
-<https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordesrst>
+[source cours antérieur](https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordesrst){.uri}
 
 -   Extraction et manipulation des données (data mining)
 -   Représentations graphiques (data visualisation)
@@ -35,11 +35,11 @@ Ce cours est un TD de data science/visualisation. Pour ce faire, nous utiliseron
 
 **Evaluation :**
 
--   choisir un **sujet de data science en lien avec votre mémoire** de fin d'année par équipe de 2
+[source cours antérieur](http://laurentpolitis.github.io/Data_Viz_Fin403/Cours_20_avril.html)
+
+-   choisir un **sujet de data science en lien avec votre mémoire** de fin d'étude par équipe de 2
 -   rendre un **rapport en format .Rmd** (idéalement) de data mining et de data visualisation avec les fichiers sources associés (.csv, script .R, ...)
 -   Questionnaire (devoir sur table)
-
-<http://laurentpolitis.github.io/Data_Viz_Fin403/Cours_20_avril.html>
 
 ## Plan de ce cours
 
@@ -59,13 +59,13 @@ Les 3 premières heures seront consacrées à une introduction sur la data scien
 
 ## Contexte
 
+traitements d'informations exemple[ étude de texte résumés d'articles tirés d'un blog](https://www.r-bloggers.com/)
+
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 #install.packages(c("tm", "SnowballC", "wordcloud", "RColorBrewer", "RCurl", "XML"))
 source('http://www.sthda.com/upload/rquery_wordcloud.r')
 res<-rquery.wordcloud("https://www.r-bloggers.com/", type ="url", lang = "english",excludeWords =tolower(c(month.name,"the","and","you","|")))
 ```
-
-<https://fr.wikipedia.org/wiki/Big_data>
 
 ## Une Réalité *Big Data*
 
@@ -133,7 +133,7 @@ ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans t
 
 ## Pourquoi R ?
 
-<https://laurentpolitis.github.io/FIN406_2017/docs/intro.html>
+[source cours 2017](https://laurentpolitis.github.io/FIN406_2017/docs/intro.html){.uri}
 
 ## Installation de R et de Rstudio
 
@@ -143,13 +143,13 @@ Liens pour installer R
 
 <https://laurentpolitis.github.io/FIN406_2017/docs/intro.html#pourquoi-r>
 
-## Data visualation
+## Data visualisation
+
+[![](https://www.hominides.com/data/images/illus/chauvet/megaceros-volcan-chauvet.jpg){height="200px" width="500px"}](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwifmvOmyLTLAhVpGZoKHfHTCVIQFggtMAI&url=http%3A%2F%2Fwww.hominides.com%2Fhtml%2Factualites%2Fvolcan-chauvet-art-parietal-0997.php&usg=AFQjCNEkHHN2mcgvHqIeMiFzsxQeHOghKw&sig2=M_S-Hnbu-FnwG4XA6kE_yg)
 
 Définition
 
 -   communiquer des données de façon visuelle
-
--   [<img src="https://www.hominides.com/data/images/illus/chauvet/megaceros-volcan-chauvet.jpg" height="200px" width="500px"/>](https://www.google.fr/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&ved=0ahUKEwifmvOmyLTLAhVpGZoKHfHTCVIQFggtMAI&url=http%3A%2F%2Fwww.hominides.com%2Fhtml%2Factualites%2Fvolcan-chauvet-art-parietal-0997.php&usg=AFQjCNEkHHN2mcgvHqIeMiFzsxQeHOghKw&sig2=M_S-Hnbu-FnwG4XA6kE_yg)
 
 -   transformer des données en information
 
