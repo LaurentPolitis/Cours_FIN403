@@ -21,22 +21,22 @@ knitr::opts_chunk$set(echo = T)
 
 ## Plan du module
 
-Ce cours est un TD de mise en pratique de data science/visualisation. Pour ce faire, nous utiliserons un langage interprété de haut niveau statistique nommé R. Les différents points abordés durant ces 15 heures de cours sont :
+Ce cours est un TD de data science/visualisation. Pour ce faire, nous utiliserons un langage interprété de haut niveau statistique **R** et l'environnement de développement intégré *(EDI fr, IDE en)* **Rstudio**. Les différents points abordés durant ces 15 heures de cours sont:
+
+<https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordesrst>
 
 -   Extraction et manipulation des données (data mining)
 -   Représentations graphiques (data visualisation)
--   Valorisations de ces données par le biais de méthodes statistiques et de visualisations
+-   Valorisations de ces données par le biais de méthodes statistiques
 -   Représentations graphiques interactives (html widget, plotly ...)
--   Shiny et R markdown création d'application et de rapport interactif
-
-<https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordesrst>
+-   Shiny et **Rmarkdown** création d'application et de rapport interactif (rapport TD à rendre idéalement sous .Rmd)
 
 ## Plan du module
 
 **Evaluation :**
 
--   présentation de vos résultats en équipe d'un sujet de data science en lien avec votre sujet de mémoire
--   script R de data mining et de data visualisation
+-   choisir un **sujet de data science en lien avec votre mémoire** de fin d'année par équipe de 2
+-   rendre un **rapport en format .Rmd** (idéalement) de data mining et de data visualisation avec les fichiers sources associés (.csv, script .R, ...)
 -   Questionnaire (devoir sur table)
 
 <http://laurentpolitis.github.io/Data_Viz_Fin403/Cours_20_avril.html>
