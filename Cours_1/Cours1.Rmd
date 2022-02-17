@@ -26,7 +26,7 @@ Ce cours est un TD d'introduction à la data science/visualisation. Pour ce fair
 [source cours antérieur](https://laurentpolitis.github.io/FIN406_2017/docs/index.html#themes-abordesrst){.uri}
 
 -   Extraction et manipulation des données (data mining)
--   Représentations graphiques (data visualisation)
+-   Représentations graphiques de vos données (data visualisation)
 -   Valorisations de ces données par le biais de méthodes statistiques
 -   Représentations graphiques interactives (html widget, plotly ...)
 -   Shiny et **Rmarkdown** création d'application et de rapport interactif (rapport TD à rendre idéalement sous .Rmd)
@@ -132,6 +132,18 @@ ggplot2::ggplot(multiTimeline,aes(as.Date(date),multiTimeline$`Big data: (Dans t
 <!-- Deep Learning  -->
 
 ## Pourquoi R ?
+
+-   Open source & Gratuit
+
+-   Facile à installer sur les systèmes d'exploitations Linux, Windows et Apple
+
+-   Une très grosse communauté de développeurs et d'utilisateurs
+
+-   Facile à utiliser pour des non-programmeurs pour des calculs statistiques, prévisions (Deep, Machine Learning) ...
+
+-   Possibilité de créer des illustrations, applications web et même la présentation que vous lisez actuellement de façon automatique
+
+    ![densité des coureurs à Paris utilisant une montre connecté](image/run_Paris.png){width="300" height="150"}
 
 [source cours 2017](https://laurentpolitis.github.io/FIN406_2017/docs/intro.html){.uri}
 
@@ -256,19 +268,7 @@ ggplot(df,aes(x=x,y=y,colour=test,size=test))+geom_text(aes(label=lettres))+labs
 
 <!-- ``` -->
 
-## Pourquoi R
-
--   Open source & Gratuit
-
--   Facile à installer sur les systèmes d'exploitations Linux, Windows et Apple
-
--   Une très grosse communauté de développeurs et d'utilisateurs
-
--   Facile à utiliser pour des non-programmeurs pour des calculs statistiques
-
--   Possibilité de créer des illustrations, applications web et même la présentation que vous lisez actuellement
-
-    ![densité des coureurs à Paris utilisant une montre connecté](image/run_Paris.png){width="300" height="150"}
+## 
 
 ## Installation de R
 
