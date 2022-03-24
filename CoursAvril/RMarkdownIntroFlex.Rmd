@@ -1,5 +1,5 @@
 ---
-title: "FIN403 2021"
+title: "FIN403 2022"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns

@@ -59,7 +59,7 @@ Les 3 premières heures seront consacrées à une introduction sur la data scien
 
 ## Contexte
 
-traitements d'informations exemple[ étude de texte résumés d'articles tirés d'un blog](https://www.r-bloggers.com/)
+traitements d'informations exemple[étude de texte résumés d'articles tirés d'un blog](https://www.r-bloggers.com/)
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 #install.packages(c("tm", "SnowballC", "wordcloud", "RColorBrewer", "RCurl", "XML"))
