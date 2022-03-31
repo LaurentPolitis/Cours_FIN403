@@ -1,7 +1,7 @@
 ---
 title: "TD ISS"
 author: "Laurent Politis"
-date: "28/04/2021"
+date: "`r Sys.Date()`"
 output: html_document
 editor_options: 
   markdown: 
@@ -73,7 +73,7 @@ Nous allons chercher les cordonnées spatiales de la station ISS :
 4.  Quelle est la classe de l'objet que vous avez récupéré ?
 
     ```{r echo=TRUE}
-    df_json = try(content(json))
+    df_json = try(httr::content(json))
     df_json
     ```
 
