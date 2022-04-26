@@ -15,47 +15,52 @@ editor_options:
   chunk_output_type: inline
 ---
 
+```{r include=FALSE}
+#Meteomatics.ini
+tidyquant::av_api_key("CNV93TAKYIS3Y1ZG")
+load("../Cours_1/dt.Rdata")
+
+```
+
+
 ## Plan du cours 
 
-- Manipulation de donnÈes (Dplyr)
+- Manipulation de donn√©es (Dplyr)
 - Fonction lapply 
-- SÈries temporelles (quantmod et lubridates)
+- S√©ries temporelles (quantmod et lubridates)
 
 
 ## Dplyr 
 
-Le principe de ce paquet est d'utiliser des fonctions de haut niveau de manipulation d'objet de donnÈes. La syntaxe et la philosophie de ce paquet est similaire au langage SQL. 
+Le principe de ce paquet est d'utiliser des fonctions de haut niveau de manipulation d'objet de donn√©es. La syntaxe et la philosophie de ce paquet est similaire au langage SQL. 
 
 
-Il permet de rÈduire dans la plupart des cas la taille du code Ècrit gr‡ce ‡ cet objet `%>%` (un opÈrateur assimilable au `+` dans ggplot2). 
+Il permet de r√©duire dans la plupart des cas la taille du code √©crit gr√¢ce √† cet objet `%>%` (un op√©rateur assimilable au `+` dans ggplot2). 
 
-A l'instar de Ggplot, il possËde une grammaire de manipulation de donnÈes. Les verbes (les fonctions) de ce paquet permettent de rÈsoudre des problËmes communs de manipulation de donnÈes. 
+A l'instar de Ggplot, il poss√®de une grammaire de manipulation de donn√©es. Les verbes (les fonctions) de ce paquet permettent de r√©soudre des probl√®mes communs de manipulation de donn√©es. 
 
 
 ## Dplyr 
 
-Nous allons Ètudier les 5 fonctions de dplyr : `mutate()`, `filter()`, `select()`, `arrange()` et finalement `summarise()`
+Nous allons √©tudier les 5 fonctions de dplyr : `mutate()`, `filter()`, `select()`, `arrange()` et finalement `summarise()`
 
 
 **Source :**
 
   [Cours de data mining](https://laurentpolitis.github.io/FIN406_2017/docs/data-mining.html)
   
-  [PrÈsentation  et installation](https://dplyr.tidyverse.org/)
+  [Pr√©sentation  et installation](https://dplyr.tidyverse.org/)
  
   [Introduction](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.htmls) 
  
   [Cours interactif](https://www.datacamp.com/courses/dplyr-data-manipulation-r-tutorial?utm_campaignid=644508384&utm_adgroupid=36650455281&utm_network=g&utm_adpostion=1t1&utm_targetid=kwd-201942240753&utm_loc_interest_ms=&utm_loc_physical_ms=9004373&gclid=CKrczMOizs8CFVdahgod1AAKVA&utm_source=adwords_ppc&utm_campaignid=898687156&utm_adgroupid=48303643819&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=1t1&utm_creative=255798221920&utm_targetid=aud-390929969673:dsa-377762271983&utm_loc_interest_ms=&utm_loc_physical_ms=9056129&gclid=CjwKCAjw6djYBRB8EiwAoAF6oWKVhpCrxxqL46Xv5Mtgqvyeh0BFMu5jxX82l66B0Cfm1XVN_96dUxoCNX0QAvD_BwE) 
 
 
-
-
-
 ## Apply function
 
 <center>
 
-  <img src="C:/Users/Laurent/Documents/Cours_FIN403_2018/Cours_4/image/apply_family.png" height="300px" width="300px" />
+  <img src="C:\Users\LF5770\Documents\R\Cours_FIN403_2018\Cours_4\image\apply_family.png" height="300px" width="300px" />
 
 </center>
 
@@ -65,48 +70,54 @@ Nous allons Ètudier les 5 fonctions de dplyr : `mutate()`, `filter()`, `select()
 ## Exemple d'une application 
 
 
-Le but de cet exemple est de tÈlÈcharger le taux de change  l'euros avec d'autre devises et d'arranger les donnÈes sous forme de data.frame. 
+Le but de cet exemple est de t√©l√©charger le taux de change de l'euros avec d'autre devises et d'arranger les donn√©es sous forme de data.frame. 
 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE,eval=F}
+```{r echo=TRUE, message=FALSE, warning=FALSE,eval=T}
 library(tidyquant) 
-dt = c("EUR/USD", "EUR/JPY", "EUR/GBP") %>% 
-tq_get(get = "exchange.rates") 
-df_list = lapply(setNames(object = unique(dt$symbol),
-                          nm = unique(dt$symbol)),
-                 function(y) return( dt %>% 
-                   filter(y == symbol)) %>%
-                   select(exchange.rate))
-#do.call utilsation d'une fonction une liste donnÈes
-df_data = do.call(what = "cbind",args = df_list)
-# changement de noms des colonnes de la data frame 
-colnames(df_data) = unique(dt$symbol)
-rownames(df_data) = (dt %>% filter("EUR/USD"==symbol) %>%
-                  select(date))$date
-```
-
-
-## RÈsulats 
-
-
-
-```{r echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE}
-library(tidyquant) 
-dt = c("EUR/USD", "EUR/JPY", "EUR/GBP") %>% 
-  tq_get(get = "exchange.rates") 
+library(dplyr) 
+dt = c("EUR/USD", "EUR/JPY", "EUR/RUB") %>% 
+ tq_get( get = "alphavantage",
+         av_fun = "FX_DAILY") %>%
+  select("timestamp","symbol","high")
  
 df_list = lapply(setNames(object = unique(dt$symbol),
                           nm = unique(dt$symbol)),
                  function(y) return( dt %>% 
-                   filter(y == symbol)) %>%
-                   select(exchange.rate))
-#do.call utilsation d'une fonction et d'une liste donnÈe 
-df_data = do.call(what = "cbind",args = df_list)
-# changement de noms des colonnes de la data frame 
-colnames(df_data) = unique(dt$symbol)
-# dates 
-rownames(df_data) = (dt %>% filter("EUR/USD"==symbol) %>%
-                  select(date))$date
+                   filter(y == symbol) %>%
+                   dplyr::select("high")))
+
+df_data = dplyr::bind_cols( df_list)
+colnames(df_data) =  c("EUR/USD", "EUR/JPY", "EUR/RUB") # changement de noms des colonnes de la data frame 
+
+rownames(df_data) = (dt %>% filter("EUR/USD"==symbol))$timestamp
+
+```
+
+## Autre m√©thode
+
+Il y a plusieurs m√©thodes ou chemins pour obtenir le m√™me r√©sultat.  Pour ce faire, une autre mani√®re de cr√©er cette  data frame et d'utiliser la fonction `tidyr::gather()`ou `tidyr::spread()`
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+library(tidyquant) 
+library(tidyquant) 
+dt = c("EUR/USD", "EUR/JPY", "EUR/RUB") %>% 
+ tq_get( get = "alphavantage",
+         av_fun = "FX_DAILY") %>%
+  select("timestamp","symbol","high")
+ 
+df_data = dt %>% tidyr::spread(symbol,high)
+
+rownames(df_data) = dt$timestamp
+
+head(df_data)
+```
+
+
+## R√©sulats 
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE}
 
 head(df_data)
 
@@ -114,7 +125,7 @@ head(df_data)
 
 ## Apply 
 
-Calcul sur des donnÈes avec des structures matricielles : 
+Calcul sur des donn√©es avec des structures matricielles : 
 
 **Moyenne par colonne **
 
@@ -141,9 +152,9 @@ apply(X =df_data ,MARGIN = c(1,2) ,FUN = mean(x))
 
 
 
-## Apply : RÈsultats 
+## Apply : R√©sultats 
 
-Calcul sur des donnÈes avec des structures matricielles : 
+Calcul sur des donn√©es avec des structures matricielles : 
 
 **Moyenne par colonne**
 
@@ -204,20 +215,20 @@ print(paste("Avec Parallelisation",Sys.time()-time))
 
 
 
-## Analyses SÈries Temporelles 
+## Analyses S√©ries Temporelles 
 
 
 ```{r fig.height=2.5, fig.width=8.5}
 
 library(ggplot2)
 
-ggplot(dt) + geom_line(aes(x = date,y = exchange.rate,color=symbol),size=1)+
-  sscale_y_log10()
+ggplot(dt) + geom_line(aes(x = timestamp,y = high,color=symbol),size=1)+
+  scale_y_log10()
 
 ```
 
 
-## Analyses SÈries Temporelles 
+## Analyses S√©ries Temporelles 
 
 
 ```{r fig.height=2.5, fig.width=8.5}
@@ -225,9 +236,9 @@ ggplot(dt) + geom_line(aes(x = date,y = exchange.rate,color=symbol),size=1)+
 library(ggplot2)
 library(lubridate)
 
-dt = dt %>% group_by(symbol) %>% mutate(growth = (exchange.rate 
-              - first(exchange.rate))/first(exchange.rate)*100)
+dt = dt %>% group_by(symbol) %>% mutate(growth = (high 
+              - first(high))/first(high)*100)
 
-ggplot(dt) + geom_line(aes(x = date,y = growth,color=symbol),size=1)
+ggplot(dt) + geom_line(aes(x = timestamp,y = growth,color=symbol),size=1)
 
 ```
